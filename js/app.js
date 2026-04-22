@@ -677,7 +677,7 @@ function renderHome() {
             <span>双人模式里还藏着一些隐藏彩蛋</span>
           </div>
           <div class="stat-chip">
-            <strong>3-5 题</strong>
+            <strong>5-8 题</strong>
             <span>得到一篇自己的宇宙报告</span>
           </div>
         </div>
