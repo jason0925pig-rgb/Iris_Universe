@@ -1,0 +1,10 @@
+{
+  "name": "iris-universe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser-first romantic iris-to-nebula experience with single and dual matching modes.",
+  "scripts": {
+    "serve": "python -m http.server 4173",
+    "dedupe": "node tools/dedupe_catalog.js"
+  }
+}

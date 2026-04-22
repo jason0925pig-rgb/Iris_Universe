@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+
+.cloudflared.err.log
+.cloudflared.log
+.cloudflared.out.log
+.http.err.log
+.http.out.log
+.local-http.err.log
+.local-http.log
+.tscheck.tmp.json
+
+node_modules/
+__pycache__/
+
+image/raw/
