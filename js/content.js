@@ -172,6 +172,70 @@ const DUAL_EASTER_QUESTIONS = {
   },
 };
 
+const EXTRA_SINGLE_QUESTIONS = [
+  {
+    id: "parallelSelf",
+    required: true,
+    prompt: "如果这个世界存在平行宇宙，而你恰好掌握了穿梭于平行宇宙中的能力，你见到另一个平行宇宙的自己会说些什么？",
+    options: [
+      { value: "compare-notes", label: "把你的选择都讲给我听，我想知道我们到底哪里不同", weights: { career: 5, love: 2, energy: 3 } },
+      { value: "hug-first", label: "先抱一下吧，原来真的有人能完全理解我", weights: { career: 1, love: 5, energy: 3 } },
+      { value: "silent-look", label: "我会先安静看着TA，确认这是不是我真正想成为的样子", weights: { career: 2, love: 1, energy: 5 } },
+      { value: "swap-destiny", label: "不如交换一天人生，看看命运会不会因此偏航", weights: { career: 4, love: 4, energy: 2 } },
+    ],
+  },
+  {
+    id: "insomniaState",
+    required: true,
+    prompt: "假设你今天晚上在睡觉之前失眠了，你会想象自己更像一个什么东西？",
+    options: [
+      { value: "radio-telescope", label: "一架射电望远镜，静静接收宇宙当中的信息", weights: { career: 4, love: 2, energy: 4 } },
+      { value: "low-satellite", label: "一颗低能量的卫星，不想思考任何事情，只想挺过这一天", weights: { career: 1, love: 2, energy: 5 } },
+      { value: "space-station", label: "宇宙中的空间站，不想被别人打扰，只想自己待着", weights: { career: 2, love: 1, energy: 5 } },
+      { value: "comet-tail", label: "拖着长长光尾的彗星，脑子里还在想着下一次远航", weights: { career: 5, love: 3, energy: 2 } },
+    ],
+  },
+  {
+    id: "nightSkyFeeling",
+    required: true,
+    prompt: "当你在深夜仰望着星空的时候，你会最先感受到什么？",
+    options: [
+      { value: "lonely", label: "孤独，像自己只是宇宙里很小的一点", weights: { career: 1, love: 3, energy: 4 } },
+      { value: "calm", label: "平静，很多吵闹都在那一刻退远了", weights: { career: 2, love: 3, energy: 5 } },
+      { value: "vast", label: "浩瀚，像被提醒还有很多地方值得去", weights: { career: 5, love: 2, energy: 2 } },
+      { value: "summoned", label: "一种被召唤的感觉，好像有什么正在等我回应", weights: { career: 4, love: 5, energy: 1 } },
+    ],
+  },
+];
+
+const EXTRA_DUAL_QUESTIONS = [
+  {
+    id: "pairDestination",
+    required: true,
+    prompt: "如果你和 TA 最后选择去星际旅行，你们会把哪里当成目的地？",
+    options: [
+      { value: "wild-planet", label: "一颗有些危险，但充满罕见自然奇观的星球", weights: { tacit: 2, chemistry: 5, growth: 4 } },
+      { value: "lively-planet", label: "一颗很有烟火气、怎么逛都不会无聊的星球", weights: { tacit: 4, chemistry: 4, growth: 3 } },
+      { value: "quiet-planet", label: "一颗平静、宁静、祥和到像暂停键的星球", weights: { tacit: 5, chemistry: 2, growth: 4 } },
+      { value: "cosmo-city", label: "一颗文化包容、聚集着人类和外星人的大星球", weights: { tacit: 3, chemistry: 3, growth: 5 } },
+    ],
+  },
+  {
+    id: "pairDistance",
+    required: true,
+    prompt: "如果用宇宙中的距离去描述你和 TA，你们更像——",
+    options: [
+      { value: "earth-moon", label: "地球和月亮的距离，始终围绕，也始终看得见", weights: { tacit: 5, chemistry: 3, growth: 4 } },
+      { value: "earth-sun", label: "地球和太阳的距离，需要刚好的远近才能长期共存", weights: { tacit: 4, chemistry: 2, growth: 5 } },
+      { value: "mars-jupiter", label: "火星和木星的距离，隔着空旷，但彼此都很有存在感", weights: { tacit: 2, chemistry: 4, growth: 3 } },
+      { value: "galaxy-edge", label: "银河两端的距离，偶尔失联，却总觉得终会再遇见", weights: { tacit: 2, chemistry: 5, growth: 2 } },
+    ],
+  },
+];
+
+SINGLE_QUESTIONS.push(...EXTRA_SINGLE_QUESTIONS);
+QUESTIONS.dual.push(...EXTRA_DUAL_QUESTIONS);
+
 const ARCHETYPE_CATALOG = {
   resonance: {
     title: "同频共振",

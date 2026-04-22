@@ -1,7 +1,7 @@
 ﻿import { fileToImage, detectIrisCircle, createCropCanvas, extractIrisFeatures, circleToCropPreview } from "./analysis.js?v=20260422e";
-import { QUESTIONS, buildSingleReading, buildDualReading, getDualEasterQuestion } from "./content.js?v=20260422e";
-import { matchSingle, buildDualRelation } from "./matching.js?v=20260422e";
-import { generateSingleShareCard, generateDualShareCard, triggerDownload } from "./share.js?v=20260422e";
+import { QUESTIONS, buildSingleReading, buildDualReading, getDualEasterQuestion } from "./content.js?v=20260422g";
+import { matchSingle, buildDualRelation } from "./matching.js?v=20260422g";
+import { generateSingleShareCard, generateDualShareCard, triggerDownload } from "./share.js?v=20260422g";
 
 const app = document.getElementById("app");
 const FULL_NEBULA_COUNT = 399;
@@ -245,7 +245,7 @@ function startMode(mode) {
   revokeShareCard();
   state.mode = mode;
   state.step = "capture";
-  state.questionDeck = mode === "single" ? shuffleArray(QUESTIONS.single) : [...QUESTIONS.dual];
+  state.questionDeck = shuffleArray(QUESTIONS[mode] || QUESTIONS.single);
   state.answers = {};
   state.result = null;
   state.error = "";
@@ -820,8 +820,8 @@ function renderQuestions() {
   const questions = currentQuestions();
   const isSingleMode = state.mode !== "dual";
   const questionIntro = isSingleMode
-    ? "单人模式有五道问题。"
-    : "双人模式默认有三道问题，但有隐藏彩蛋可解锁。";
+    ? `单人模式现在有 ${QUESTIONS.single.length} 道必答题。`
+    : `双人模式现在有 ${QUESTIONS.dual.length} 道必答题，另外仍然可能解锁隐藏彩蛋。`;
   return `
     <section class="capture-layout">
       <article class="panel question-panel">
@@ -840,7 +840,7 @@ function renderQuestions() {
               (question, index) => `
                 <section class="question-card">
                   <div class="question-meta">
-                    <span class="eyebrow">${escapeHtml(isSingleMode ? `问题 ${index + 1}` : `${question.title}${question.required ? "" : " · 可跳过"}`)}</span>
+                    <span class="eyebrow">${escapeHtml(`问题 ${index + 1}`)}</span>
                     <span class="step-counter">${state.answers[question.id] ? "已选择" : question.required ? "待回答" : "可选"}</span>
                   </div>
                   <p class="question-prompt">${escapeHtml(question.prompt)}</p>
