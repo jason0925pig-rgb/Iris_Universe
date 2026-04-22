@@ -18,6 +18,7 @@ const state = {
   gazeCount: 0,
   captures: [],
   questionDeck: [],
+  hiddenQuestion: null,
   answers: {},
   result: null,
   shareCard: null,
@@ -138,6 +139,36 @@ function shuffleArray(items) {
   return next;
 }
 
+function cloneQuestion(question) {
+  return {
+    ...question,
+    options: shuffleArray((question.options || []).map((option) => ({ ...option }))),
+  };
+}
+
+function buildQuestionDeck(mode) {
+  return shuffleArray((QUESTIONS[mode] || QUESTIONS.single).map(cloneQuestion));
+}
+
+function getPreparedHiddenQuestion() {
+  if (state.mode !== "dual") {
+    state.hiddenQuestion = null;
+    return null;
+  }
+
+  const hiddenTemplate = getDualEasterQuestion(state.captures.map((capture) => capture.identity));
+  if (!hiddenTemplate) {
+    state.hiddenQuestion = null;
+    return null;
+  }
+
+  if (!state.hiddenQuestion || state.hiddenQuestion.prompt !== hiddenTemplate.prompt) {
+    state.hiddenQuestion = cloneQuestion(hiddenTemplate);
+  }
+
+  return state.hiddenQuestion;
+}
+
 function readStoredGazeCount() {
   try {
     return Number(window.localStorage.getItem(GAZE_COUNTER_KEY) || 0);
@@ -229,7 +260,7 @@ function mountHomeCarousel() {
 
 function currentQuestions() {
   if (state.mode === "dual") {
-    const hiddenQuestion = getDualEasterQuestion(state.captures.map((capture) => capture.identity));
+    const hiddenQuestion = getPreparedHiddenQuestion();
     return hiddenQuestion ? [...state.questionDeck, hiddenQuestion] : state.questionDeck;
   }
   if (state.questionDeck.length) return state.questionDeck;
@@ -245,7 +276,8 @@ function startMode(mode) {
   revokeShareCard();
   state.mode = mode;
   state.step = "capture";
-  state.questionDeck = shuffleArray(QUESTIONS[mode] || QUESTIONS.single);
+  state.questionDeck = buildQuestionDeck(mode);
+  state.hiddenQuestion = null;
   state.answers = {};
   state.result = null;
   state.error = "";
@@ -268,6 +300,7 @@ function goHome() {
   state.mode = null;
   state.step = "home";
   state.questionDeck = [];
+  state.hiddenQuestion = null;
   state.answers = {};
   state.result = null;
   state.cropper = null;
