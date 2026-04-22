@@ -2,6 +2,14 @@
 
 Iris Universe is a browser-first art experience that matches a user's iris photo to a real nebula image from NASA.
 
+## Live Site
+
+If you want to visit the public site, open:
+
+- [https://iris-universe.com/](https://iris-universe.com/)
+
+This custom domain is the long-term public entry for the project.
+
 The current site includes:
 
 - Single mode: iris-to-nebula matching with narrative, career line, love line, and energy line
