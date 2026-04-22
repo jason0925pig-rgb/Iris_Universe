@@ -763,6 +763,17 @@ img {
   font-size: 1.04rem;
 }
 
+.relationship-badge {
+  display: block;
+  margin-bottom: 14px;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff4df;
+  text-shadow: 0 10px 24px rgba(255, 126, 121, 0.22);
+}
+
 .metrics-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1464,5 +1475,10 @@ img {
     padding: 18px;
     font-size: 1rem;
     line-height: 1.85;
+  }
+
+  .relationship-badge {
+    font-size: clamp(1.8rem, 10vw, 2.8rem);
+    margin-bottom: 12px;
   }
 }

@@ -673,8 +673,8 @@ function renderHome() {
             <span>本地分析，服务器不会采集数据</span>
           </div>
           <div class="stat-chip">
-            <strong>${state.gazeCount}</strong>
-            <span>次眼睛与星空对望</span>
+            <strong>免费测试</strong>
+            <span>双人模式里还藏着一些隐藏彩蛋</span>
           </div>
           <div class="stat-chip">
             <strong>3-5 题</strong>
@@ -1026,13 +1026,13 @@ function renderDualResult() {
           </div>
           <div class="pair-card">
             <div class="nebula-frame"><img src="${rightMatch.nebula.thumb}" alt="${escapeHtml(rightMatch.nebula.titleCn || rightMatch.nebula.titleShort)}" /></div>
-            <h4 style="margin-top: 14px;">TA 路 ${escapeHtml(rightMatch.nebula.titleCn || rightMatch.nebula.titleShort)}</h4>
+            <h4 style="margin-top: 14px;">TA · ${escapeHtml(rightMatch.nebula.titleCn || rightMatch.nebula.titleShort)}</h4>
             <p>${escapeHtml(rightMatch.nebula.cosmicFact)}</p>
           </div>
         </div>
 
         <blockquote class="result-quote">
-          <strong style="display:block; margin-bottom: 10px;">${escapeHtml(reading.headline)}</strong>
+          <strong class="relationship-badge">${escapeHtml(reading.headline)}</strong>
           <span style="display:block; margin-bottom: 12px; color: rgba(255,255,255,0.72);">${escapeHtml(reading.subtitle)}</span>
           ${escapeHtml(reading.narrative)}
         </blockquote>
