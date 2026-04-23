@@ -5,6 +5,7 @@
   "description": "A browser-first romantic iris-to-nebula experience with single and dual matching modes.",
   "scripts": {
     "serve": "python -m http.server 4173",
-    "dedupe": "node tools/dedupe_catalog.js"
+    "dedupe": "node tools/dedupe_catalog.js",
+    "build:fonts": "python tools/build_local_fonts.py"
   }
 }

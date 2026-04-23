@@ -44,6 +44,7 @@ Then open:
 
 - `npm run serve`: start a local static server
 - `npm run dedupe`: run the nebula catalog dedupe utility
+- `npm run build:fonts`: rebuild the self-hosted font subset files used in production
 
 ## Deploy Notes
 
