@@ -1,3 +1,5 @@
+import { text } from "./i18n.js?v=20260503a";
+
 const MEDIAPIPE_VERSION = "0.10.14";
 const FACE_LANDMARK_MODEL =
   "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
@@ -46,11 +48,11 @@ function normalizeImageToCanvas(image, size = 320) {
 export function fileToImage(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onerror = () => reject(new Error("无法读取图片文件"));
+    reader.onerror = () => reject(new Error(text("无法读取图片文件", "Could not read the image file")));
     reader.onload = () => {
       const img = new Image();
       img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error("图片加载失败"));
+      img.onerror = () => reject(new Error(text("图片加载失败", "Image loading failed")));
       img.src = reader.result;
     };
     reader.readAsDataURL(file);

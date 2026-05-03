@@ -1,3 +1,5 @@
+import { nebulaName, text } from "./i18n.js?v=20260503a";
+
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -115,7 +117,7 @@ export async function generateSingleShareCard(result) {
 
   ctx.font = "500 30px Space Grotesk";
   ctx.fillStyle = "rgba(255,255,255,0.68)";
-  ctx.fillText(`匹配率 ${result.match.matchRate}%`, 84, 1176);
+  ctx.fillText(`${result.reading.shareLabels?.matchRate || text("匹配率", "Match")} ${result.match.matchRate}%`, 84, 1176);
 
   roundedRect(ctx, 84, 1216, 912, 300, 36);
   ctx.fillStyle = "rgba(255,255,255,0.05)";
@@ -129,15 +131,15 @@ export async function generateSingleShareCard(result) {
 
   ctx.fillStyle = "rgba(255,255,255,0.7)";
   ctx.font = "500 28px Space Grotesk";
-  ctx.fillText(result.match.nebula.titleCn || result.match.nebula.titleShort, 84, 1570);
+  ctx.fillText(nebulaName(result.match.nebula), 84, 1570);
 
   ctx.font = "500 26px Space Grotesk";
   ctx.fillStyle = "rgba(255,255,255,0.52)";
-  ctx.fillText("真实星云图像 x 可解释虹膜匹配", 84, 1614);
+  ctx.fillText(result.reading.shareLabels?.tagline || text("真实星云图像 x 可解释虹膜匹配", "Real NASA imagery x explainable iris matching"), 84, 1614);
 
   ctx.fillStyle = "rgba(255,255,255,0.86)";
   ctx.font = "700 32px Space Grotesk";
-  ctx.fillText("扫描你的眼睛，找到你的星云。", 84, 1786);
+  ctx.fillText(result.reading.shareLabels?.cta || text("扫描你的眼睛，找到你的星云。", "Scan your eye. Find your nebula."), 84, 1786);
 
   const blob = await canvasToBlob(canvas);
   return { canvas, blob, url: URL.createObjectURL(blob) };
@@ -164,7 +166,7 @@ export async function generateDualShareCard(result) {
 
   ctx.font = "500 28px Space Grotesk";
   ctx.fillStyle = "rgba(255,255,255,0.7)";
-  ctx.fillText(`关系共振 ${result.relation.matchRate}%`, 84, 752);
+  ctx.fillText(`${result.reading.shareLabels?.resonance || text("关系共振", "Resonance")} ${result.relation.matchRate}%`, 84, 752);
 
   roundedRect(ctx, 72, 804, 936, 368, 44);
   ctx.fillStyle = "rgba(255,255,255,0.05)";
@@ -181,17 +183,17 @@ export async function generateDualShareCard(result) {
 
   ctx.font = "700 30px Space Grotesk";
   ctx.fillStyle = "rgba(255,255,255,0.86)";
-  ctx.fillText(result.leftMatch.nebula.titleCn || result.leftMatch.nebula.titleShort, 84, 1308);
-  ctx.fillText(result.rightMatch.nebula.titleCn || result.rightMatch.nebula.titleShort, 570, 1308);
+  ctx.fillText(nebulaName(result.leftMatch.nebula), 84, 1308);
+  ctx.fillText(nebulaName(result.rightMatch.nebula), 570, 1308);
 
   ctx.font = "500 24px Space Grotesk";
   ctx.fillStyle = "rgba(255,255,255,0.55)";
-  ctx.fillText("左眼星云", 84, 1342);
-  ctx.fillText("右眼星云", 570, 1342);
+  ctx.fillText(result.reading.shareLabels?.leftNebula || text("左眼星云", "Left Nebula"), 84, 1342);
+  ctx.fillText(result.reading.shareLabels?.rightNebula || text("右眼星云", "Right Nebula"), 570, 1342);
 
   ctx.font = "700 32px Space Grotesk";
   ctx.fillStyle = "rgba(255,255,255,0.86)";
-  ctx.fillText("在虹膜宇宙里，看见你们的关系轨道。", 84, 1764);
+  ctx.fillText(result.reading.shareLabels?.cta || text("在虹膜宇宙里，看见你们的关系轨道。", "See your shared orbit in Iris Universe."), 84, 1764);
 
   const blob = await canvasToBlob(canvas);
   return { canvas, blob, url: URL.createObjectURL(blob) };

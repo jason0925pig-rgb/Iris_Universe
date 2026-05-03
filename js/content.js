@@ -1,8 +1,17 @@
+import { isEnglish, nebulaFact, nebulaName, text } from "./i18n.js?v=20260503a";
+
 const SINGLE_MOOD_OPENINGS = {
   core: "你天然带着一点会被人群看见的引力，很多目光和关系都会不自觉地向你靠近。",
   frontier: "你的虹膜节奏更偏向边缘地带的安静，不喧闹，但很有自己的内部秩序。",
   blackhole: "你的纹理里有一种危险却迷人的深度，像靠近黑洞轨道时那种无法轻易抽身的吸引。",
   nebula: "你的眼纹更像新生星云，柔软、流动、但内部一直有事情在慢慢长出来。",
+};
+
+const SINGLE_MOOD_OPENINGS_EN = {
+  core: "You carry a kind of visible gravity; attention and connection tend to drift toward you before anyone fully notices why.",
+  frontier: "Your iris rhythm belongs closer to the edge of the map: quiet, self-contained, and governed by its own inner order.",
+  blackhole: "There is a dangerous, magnetic depth in your texture, like entering the orbit of a black hole and realizing it is not easy to leave.",
+  nebula: "Your eye pattern feels like a newborn nebula: soft and fluid, with something quietly forming inside it all the time.",
 };
 
 const SINGLE_PLANET_LINES = {
@@ -12,11 +21,25 @@ const SINGLE_PLANET_LINES = {
   neptune: "你愿意把自己比作海王星，说明你对内在世界很有保护欲，很多情绪不会第一时间公开给别人看。",
 };
 
+const SINGLE_PLANET_LINES_EN = {
+  sun: "Choosing the Sun means your gaze is not only bright; it naturally gathers attention and turns the room toward your field.",
+  earth: "Placing yourself as Earth suggests that you value aliveness, real response, and relationships that can be lived in over time.",
+  saturn: "You are closer to Saturn: beautiful because of boundaries, rhythm, and a self-contained system not everyone can enter.",
+  neptune: "Choosing Neptune says you protect your inner world carefully; many feelings are real long before they become visible.",
+};
+
 const SINGLE_WINDOW_LINES = {
   ocean: "你看世界的方式更偏潮汐感，不是一下子定论，而是靠反复靠近和退开来确认真实。",
   alien: "你身上有一点不肯随便复制别人的部分，所以很多重要决定都更适合走自己的路径。",
   primordial: "你和时间的关系更像沉淀，很多东西不会立刻下结论，但会越放越清楚。",
   light: "你更相信那些迟到但准确的回应，所以很多关系和机会在你这里都讲究抵达感。",
+};
+
+const SINGLE_WINDOW_LINES_EN = {
+  ocean: "Your way of reading the world is tidal: you do not decide everything at once, but learn truth by approaching and retreating.",
+  alien: "There is a part of you that refuses to simply copy the world around you, so many important choices work best on your own route.",
+  primordial: "Your relationship with time is sedimentary; not everything becomes clear immediately, but what stays keeps gaining definition.",
+  light: "You believe in replies that arrive late but arrive accurately, so connection and opportunity matter most when they truly land.",
 };
 
 const SINGLE_SIGNAL_LINES = {
@@ -26,6 +49,13 @@ const SINGLE_SIGNAL_LINES = {
   follow: "你对未知一直有探险欲，所以只要某件事足够新鲜、足够真，你会愿意把自己推远一点。",
 };
 
+const SINGLE_SIGNAL_LINES_EN = {
+  decode: "When facing an unknown signal, you prefer to decode its structure before answering, which makes your first impression calmer than your real inner world.",
+  answer: "Once you feel a clear summons, you rarely pretend not to hear it; when fate moves closer, you usually do reach out.",
+  observe: "You do not rush toward the unknown; you confirm the weather first, and that slowness is self-protection rather than hesitation.",
+  follow: "You have an appetite for unexplored things, so when something feels fresh and true enough, you are willing to push yourself farther out.",
+};
+
 const SINGLE_ROLE_LINES = {
   captain: "如果宇宙大航海真的开始，你会更愿意站到舰桥中央，说明你不排斥承担方向和决断。",
   navigator: "你更像领航员，擅长在混乱里校准坐标，不一定总站在最前面，但很会决定往哪去。",
@@ -33,60 +63,72 @@ const SINGLE_ROLE_LINES = {
   chef: "你愿意做厨师，说明你相信温度和日常能够维系一段长期关系，很多重要的连接其实都发生在细节里。",
 };
 
+const SINGLE_ROLE_LINES_EN = {
+  captain: "If the age of cosmic navigation begins, you would rather stand at the bridge; you do not reject direction, pressure, or decision.",
+  navigator: "You are closer to the navigator: not always in front, but very good at calibrating coordinates when everything is noisy.",
+  doctor: "Choosing the doctor means you notice people's condition, depletion, and recovery faster than most.",
+  chef: "Choosing the chef means you trust warmth and ordinary rituals to hold long relationships together; the real bond often happens in details.",
+};
+
 const SINGLE_QUESTIONS = [
   {
     id: "habitat",
     required: true,
     prompt: "如果真的住进宇宙，你会把家安在——",
+    promptEn: "If you could truly live somewhere in the universe, where would you build your home?",
     options: [
-      { value: "core", label: "宇宙中心", weights: { career: 4, love: 5, energy: 1 } },
-      { value: "frontier", label: "偏远边缘地带", weights: { career: 2, love: 1, energy: 5 } },
-      { value: "blackhole", label: "黑洞附近的危险轨道", weights: { career: 5, love: 2, energy: 3 } },
-      { value: "nebula", label: "新生星云的航道里", weights: { career: 3, love: 4, energy: 3 } },
+      { value: "core", label: "宇宙中心", labelEn: "At the center of the universe", weights: { career: 4, love: 5, energy: 1 } },
+      { value: "frontier", label: "偏远边缘地带", labelEn: "On a quiet outer frontier", weights: { career: 2, love: 1, energy: 5 } },
+      { value: "blackhole", label: "黑洞附近的危险轨道", labelEn: "In a dangerous orbit near a black hole", weights: { career: 5, love: 2, energy: 3 } },
+      { value: "nebula", label: "新生星云的航道里", labelEn: "Along the path of a newborn nebula", weights: { career: 3, love: 4, energy: 3 } },
     ],
   },
   {
     id: "planet",
     required: true,
     prompt: "如果把你的眼睛放进太阳系，你更愿意把它比作——",
+    promptEn: "If your eye were placed inside the Solar System, what would you compare it to?",
     options: [
-      { value: "sun", label: "太阳", weights: { career: 5, love: 3, energy: 2 } },
-      { value: "earth", label: "地球", weights: { career: 3, love: 5, energy: 4 } },
-      { value: "saturn", label: "土星", weights: { career: 4, love: 2, energy: 4 } },
-      { value: "neptune", label: "海王星", weights: { career: 2, love: 2, energy: 5 } },
+      { value: "sun", label: "太阳", labelEn: "The Sun", weights: { career: 5, love: 3, energy: 2 } },
+      { value: "earth", label: "地球", labelEn: "Earth", weights: { career: 3, love: 5, energy: 4 } },
+      { value: "saturn", label: "土星", labelEn: "Saturn", weights: { career: 4, love: 2, energy: 4 } },
+      { value: "neptune", label: "海王星", labelEn: "Neptune", weights: { career: 2, love: 2, energy: 5 } },
     ],
   },
   {
     id: "window",
     required: true,
     prompt: "如果你的眼睛是一扇窗，窗外是——",
+    promptEn: "If your eye were a window, what would be outside it?",
     options: [
-      { value: "ocean", label: "深夜的海", weights: { career: 1, love: 4, energy: 4 } },
-      { value: "alien", label: "未知星球", weights: { career: 4, love: 1, energy: 3 } },
-      { value: "primordial", label: "宇宙清晨", weights: { career: 3, love: 2, energy: 5 } },
-      { value: "light", label: "很久以前的一束光", weights: { career: 3, love: 5, energy: 2 } },
+      { value: "ocean", label: "深夜的海", labelEn: "A midnight ocean", weights: { career: 1, love: 4, energy: 4 } },
+      { value: "alien", label: "未知星球", labelEn: "An unknown planet", weights: { career: 4, love: 1, energy: 3 } },
+      { value: "primordial", label: "宇宙清晨", labelEn: "The first morning of the universe", weights: { career: 3, love: 2, energy: 5 } },
+      { value: "light", label: "很久以前的一束光", labelEn: "A beam of light from long ago", weights: { career: 3, love: 5, energy: 2 } },
     ],
   },
   {
     id: "signal",
     required: true,
     prompt: "如果宇宙突然向你发来一段未知信号，你会先——",
+    promptEn: "If the universe suddenly sent you an unknown signal, what would you do first?",
     options: [
-      { value: "decode", label: "先拆解它的规律", weights: { career: 5, love: 1, energy: 3 } },
-      { value: "answer", label: "立刻回应它", weights: { career: 3, love: 5, energy: 2 } },
-      { value: "observe", label: "远远观察一阵", weights: { career: 2, love: 2, energy: 5 } },
-      { value: "follow", label: "顺着它去探险", weights: { career: 4, love: 3, energy: 4 } },
+      { value: "decode", label: "先拆解它的规律", labelEn: "Decode its pattern first", weights: { career: 5, love: 1, energy: 3 } },
+      { value: "answer", label: "立刻回应它", labelEn: "Answer it immediately", weights: { career: 3, love: 5, energy: 2 } },
+      { value: "observe", label: "远远观察一阵", labelEn: "Observe it from a distance", weights: { career: 2, love: 2, energy: 5 } },
+      { value: "follow", label: "顺着它去探险", labelEn: "Follow it into the unknown", weights: { career: 4, love: 3, energy: 4 } },
     ],
   },
   {
     id: "role",
     required: true,
     prompt: "如果人类进入宇宙大航海时代，你在飞船上最像——",
+    promptEn: "If humanity entered the age of cosmic navigation, who would you be on the ship?",
     options: [
-      { value: "captain", label: "舰长", weights: { career: 5, love: 2, energy: 2 } },
-      { value: "navigator", label: "领航员", weights: { career: 4, love: 2, energy: 5 } },
-      { value: "doctor", label: "医生", weights: { career: 2, love: 5, energy: 4 } },
-      { value: "chef", label: "厨师", weights: { career: 2, love: 4, energy: 4 } },
+      { value: "captain", label: "舰长", labelEn: "The captain", weights: { career: 5, love: 2, energy: 2 } },
+      { value: "navigator", label: "领航员", labelEn: "The navigator", weights: { career: 4, love: 2, energy: 5 } },
+      { value: "doctor", label: "医生", labelEn: "The doctor", weights: { career: 2, love: 5, energy: 4 } },
+      { value: "chef", label: "厨师", labelEn: "The chef", weights: { career: 2, love: 4, energy: 4 } },
     ],
   },
 ];
@@ -98,36 +140,42 @@ export const QUESTIONS = {
       id: "pairOrbit",
       required: true,
       title: "必答 1",
+      titleEn: "Required 1",
       prompt: "如果把你们的关系比作一种宇宙的运动，它更像——",
+      promptEn: "If your relationship were a kind of cosmic motion, what would it be closest to?",
       options: [
-        { value: "twin-star", label: "像月球绕着地球旋转一样", weights: { tacit: 5, chemistry: 3, growth: 4 } },
-        { value: "relay", label: "像地球和火星那样，一起围绕同一个核心天体运转", weights: { tacit: 4, chemistry: 2, growth: 5 } },
-        { value: "slingshot", label: "像流星划过地球夜空，一生只相交一次", weights: { tacit: 2, chemistry: 5, growth: 2 } },
-        { value: "nebula-drift", label: "像未被探测出规律的某种运动", weights: { tacit: 3, chemistry: 4, growth: 3 } },
+        { value: "twin-star", label: "像月球绕着地球旋转一样", labelEn: "Like the Moon orbiting Earth", weights: { tacit: 5, chemistry: 3, growth: 4 } },
+        { value: "relay", label: "像地球和火星那样，一起围绕同一个核心天体运转", labelEn: "Like Earth and Mars moving around the same central body", weights: { tacit: 4, chemistry: 2, growth: 5 } },
+        { value: "slingshot", label: "像流星划过地球夜空，一生只相交一次", labelEn: "Like a meteor crossing Earth's night sky only once", weights: { tacit: 2, chemistry: 5, growth: 2 } },
+        { value: "nebula-drift", label: "像未被探测出规律的某种运动", labelEn: "Like an orbit whose law has not been discovered yet", weights: { tacit: 3, chemistry: 4, growth: 3 } },
       ],
     },
     {
       id: "pairNeed",
       required: true,
       title: "必答 2",
+      titleEn: "Required 2",
       prompt: "人类到了宇宙大航海时代，当你和 TA 在同一艘宇宙飞船返回地球家园的时候，你对 TA 发出什么样的邀约，你觉得 TA 最不会拒绝？",
+      promptEn: "In the age of cosmic voyages, you and TA are returning to Earth on the same spacecraft. What invitation would TA be least likely to refuse?",
       options: [
-        { value: "radar", label: "一起去酒吧小酌一杯", weights: { tacit: 5, chemistry: 2, growth: 4 } },
-        { value: "spark", label: "一起去健身房健身一下", weights: { tacit: 2, chemistry: 5, growth: 2 } },
-        { value: "map", label: "一起去舷窗边看地球重新亮起来", weights: { tacit: 3, chemistry: 2, growth: 5 } },
-        { value: "cabin", label: "直接去休眠舱睡觉，没有邀约的必要", weights: { tacit: 4, chemistry: 4, growth: 3 } },
+        { value: "radar", label: "一起去酒吧小酌一杯", labelEn: "A quiet drink at a bar", weights: { tacit: 5, chemistry: 2, growth: 4 } },
+        { value: "spark", label: "一起去健身房健身一下", labelEn: "A workout together", weights: { tacit: 2, chemistry: 5, growth: 2 } },
+        { value: "map", label: "一起去舷窗边看地球重新亮起来", labelEn: "Watch Earth light up again by the window", weights: { tacit: 3, chemistry: 2, growth: 5 } },
+        { value: "cabin", label: "直接去休眠舱睡觉，没有邀约的必要", labelEn: "Go straight to the sleep pod; no invitation needed", weights: { tacit: 4, chemistry: 4, growth: 3 } },
       ],
     },
     {
       id: "pairScene",
       required: true,
       title: "必答 3",
+      titleEn: "Required 3",
       prompt: "对方的眼睛给你的感觉是什么？",
+      promptEn: "What does TA's eye make you feel?",
       options: [
-        { value: "aurora", label: "宇宙的深邃", weights: { tacit: 5, chemistry: 3, growth: 3 } },
-        { value: "meteor", label: "星际大冒险的探索与冒险", weights: { tacit: 2, chemistry: 4, growth: 4 } },
-        { value: "rift", label: "黑洞和暗物质之间的危险与神秘", weights: { tacit: 2, chemistry: 5, growth: 3 } },
-        { value: "harbor", label: "很远的星光回到身边的温柔", weights: { tacit: 4, chemistry: 3, growth: 5 } },
+        { value: "aurora", label: "宇宙的深邃", labelEn: "Cosmic depth", weights: { tacit: 5, chemistry: 3, growth: 3 } },
+        { value: "meteor", label: "星际大冒险的探索与冒险", labelEn: "The thrill of an interstellar adventure", weights: { tacit: 2, chemistry: 4, growth: 4 } },
+        { value: "rift", label: "黑洞和暗物质之间的危险与神秘", labelEn: "The danger and mystery between a black hole and dark matter", weights: { tacit: 2, chemistry: 5, growth: 3 } },
+        { value: "harbor", label: "很远的星光回到身边的温柔", labelEn: "A faraway starlight returning gently beside you", weights: { tacit: 4, chemistry: 3, growth: 5 } },
       ],
     },
   ],
@@ -138,36 +186,42 @@ const DUAL_EASTER_QUESTIONS = {
     id: "pairEaster",
     required: true,
     title: "隐藏 4",
+    titleEn: "Hidden 4",
     prompt: "当你们又见面了的时候，当你认真看向对方的眼睛的时候，你会想什么？",
+    promptEn: "When you meet again and look seriously into TA's eyes, what comes to mind?",
     options: [
-      { value: "dad", label: "你爹来喽" },
-      { value: "save", label: "又能并肩狠狠干一场了" },
-      { value: "roast", label: "先损你两句再说" },
-      { value: "cover", label: "这次我还是会站你这边" },
+      { value: "dad", label: "你爹来喽", labelEn: "Your dad has arrived" },
+      { value: "save", label: "又能并肩狠狠干一场了", labelEn: "We get to fight side by side again" },
+      { value: "roast", label: "先损你两句再说", labelEn: "Roast you first, talk later" },
+      { value: "cover", label: "这次我还是会站你这边", labelEn: "I would still take your side this time" },
     ],
   },
   "male-female": {
     id: "pairEaster",
     required: true,
     title: "隐藏 4",
+    titleEn: "Hidden 4",
     prompt: "当你们快要分别的时候，当你看向对方的眼睛，你会想什么？",
+    promptEn: "When you are about to part and look into TA's eyes, what do you think?",
     options: [
-      { value: "steady", label: "感觉很平静，我们马上就会再见面了" },
-      { value: "tease", label: "还是会有一点舍不得" },
-      { value: "orbit", label: "好像还有很多话没说完" },
-      { value: "wink", label: "只要你回头，我应该还会在那里" },
+      { value: "steady", label: "感觉很平静，我们马上就会再见面了", labelEn: "It feels peaceful; we will see each other again soon" },
+      { value: "tease", label: "还是会有一点舍不得", labelEn: "I would still feel a little reluctant to leave" },
+      { value: "orbit", label: "好像还有很多话没说完", labelEn: "It feels like there is still so much unsaid" },
+      { value: "wink", label: "只要你回头，我应该还会在那里", labelEn: "If you look back, I will probably still be there" },
     ],
   },
   "female-female": {
     id: "pairEaster",
     required: true,
     title: "隐藏 4",
+    titleEn: "Hidden 4",
     prompt: "当你们马上又要见面的时候，当你认真看向对方的眼睛，你会想什么？",
+    promptEn: "When you are about to meet again and look carefully into TA's eyes, what comes to mind?",
     options: [
-      { value: "mom", label: "姐妹你好米呀" },
-      { value: "judge", label: "这次我要先抱你一下" },
-      { value: "alliance", label: "完了，又要一起漂亮出场了" },
-      { value: "smirk", label: "一看见你就知道今天不会无聊" },
+      { value: "mom", label: "姐妹你好米呀", labelEn: "Girl, you are so pretty" },
+      { value: "judge", label: "这次我要先抱你一下", labelEn: "This time I need to hug you first" },
+      { value: "alliance", label: "完了，又要一起漂亮出场了", labelEn: "Oh no, we are about to make an entrance again" },
+      { value: "smirk", label: "一看见你就知道今天不会无聊", labelEn: "Seeing you means today will not be boring" },
     ],
   },
 };
@@ -177,33 +231,36 @@ const EXTRA_SINGLE_QUESTIONS = [
     id: "parallelSelf",
     required: true,
     prompt: "如果这个世界存在平行宇宙，而你恰好掌握了穿梭于平行宇宙中的能力，你见到另一个平行宇宙的自己会说些什么？",
+    promptEn: "If parallel universes existed and you could move between them, what would you say to another version of yourself?",
     options: [
-      { value: "compare-notes", label: "把你的选择都讲给我听，我想知道我们到底哪里不同", weights: { career: 5, love: 2, energy: 3 } },
-      { value: "hug-first", label: "先抱一下吧，原来真的有人能完全理解我", weights: { career: 1, love: 5, energy: 3 } },
-      { value: "silent-look", label: "我会先安静看着TA，确认这是不是我真正想成为的样子", weights: { career: 2, love: 1, energy: 5 } },
-      { value: "swap-destiny", label: "不如交换一天人生，看看命运会不会因此偏航", weights: { career: 4, love: 4, energy: 2 } },
+      { value: "compare-notes", label: "把你的选择都讲给我听，我想知道我们到底哪里不同", labelEn: "Tell me every choice you made; I want to know where we diverged", weights: { career: 5, love: 2, energy: 3 } },
+      { value: "hug-first", label: "先抱一下吧，原来真的有人能完全理解我", labelEn: "Let me hug you first; so someone really can understand me completely", weights: { career: 1, love: 5, energy: 3 } },
+      { value: "silent-look", label: "我会先安静看着TA，确认这是不是我真正想成为的样子", labelEn: "I would look quietly first, checking whether this is who I want to become", weights: { career: 2, love: 1, energy: 5 } },
+      { value: "swap-destiny", label: "不如交换一天人生，看看命运会不会因此偏航", labelEn: "Let's swap lives for a day and see if destiny changes course", weights: { career: 4, love: 4, energy: 2 } },
     ],
   },
   {
     id: "insomniaState",
     required: true,
     prompt: "假设你今天晚上在睡觉之前失眠了，你会想象自己更像一个什么东西？",
+    promptEn: "If you were sleepless tonight before bed, what would you imagine yourself as?",
     options: [
-      { value: "radio-telescope", label: "一架射电望远镜，静静接收宇宙当中的信息", weights: { career: 4, love: 2, energy: 4 } },
-      { value: "low-satellite", label: "一颗低能量的卫星，不想思考任何事情，只想挺过这一天", weights: { career: 1, love: 2, energy: 5 } },
-      { value: "space-station", label: "宇宙中的空间站，不想被别人打扰，只想自己待着", weights: { career: 2, love: 1, energy: 5 } },
-      { value: "comet-tail", label: "拖着长长光尾的彗星，脑子里还在想着下一次远航", weights: { career: 5, love: 3, energy: 2 } },
+      { value: "radio-telescope", label: "一架射电望远镜，静静接收宇宙当中的信息", labelEn: "A radio telescope quietly receiving cosmic signals", weights: { career: 4, love: 2, energy: 4 } },
+      { value: "low-satellite", label: "一颗低能量的卫星，不想思考任何事情，只想挺过这一天", labelEn: "A low-energy satellite that wants to think about nothing and survive the day", weights: { career: 1, love: 2, energy: 5 } },
+      { value: "space-station", label: "宇宙中的空间站，不想被别人打扰，只想自己待着", labelEn: "A space station that wants to be left alone", weights: { career: 2, love: 1, energy: 5 } },
+      { value: "comet-tail", label: "拖着长长光尾的彗星，脑子里还在想着下一次远航", labelEn: "A comet with a long tail of light already thinking about the next voyage", weights: { career: 5, love: 3, energy: 2 } },
     ],
   },
   {
     id: "nightSkyFeeling",
     required: true,
     prompt: "当你在深夜仰望着星空的时候，你会最先感受到什么？",
+    promptEn: "When you look up at the night sky late at night, what do you feel first?",
     options: [
-      { value: "lonely", label: "孤独，像自己只是宇宙里很小的一点", weights: { career: 1, love: 3, energy: 4 } },
-      { value: "calm", label: "平静，很多吵闹都在那一刻退远了", weights: { career: 2, love: 3, energy: 5 } },
-      { value: "vast", label: "浩瀚，像被提醒还有很多地方值得去", weights: { career: 5, love: 2, energy: 2 } },
-      { value: "summoned", label: "一种被召唤的感觉，好像有什么正在等我回应", weights: { career: 4, love: 5, energy: 1 } },
+      { value: "lonely", label: "孤独，像自己只是宇宙里很小的一点", labelEn: "Loneliness, as if I am only a tiny point in the universe", weights: { career: 1, love: 3, energy: 4 } },
+      { value: "calm", label: "平静，很多吵闹都在那一刻退远了", labelEn: "Calm, as if the noise finally moved away", weights: { career: 2, love: 3, energy: 5 } },
+      { value: "vast", label: "浩瀚，像被提醒还有很多地方值得去", labelEn: "Vastness, like a reminder that there are still places worth going", weights: { career: 5, love: 2, energy: 2 } },
+      { value: "summoned", label: "一种被召唤的感觉，好像有什么正在等我回应", labelEn: "A sense of being summoned, as if something is waiting for my answer", weights: { career: 4, love: 5, energy: 1 } },
     ],
   },
 ];
@@ -213,22 +270,24 @@ const EXTRA_DUAL_QUESTIONS = [
     id: "pairDestination",
     required: true,
     prompt: "如果你和 TA 最后选择去星际旅行，你们会把哪里当成目的地？",
+    promptEn: "If you and TA chose an interstellar trip, where would you go?",
     options: [
-      { value: "wild-planet", label: "一颗有些危险，但充满罕见自然奇观的星球", weights: { tacit: 2, chemistry: 5, growth: 4 } },
-      { value: "lively-planet", label: "一颗很有烟火气、怎么逛都不会无聊的星球", weights: { tacit: 4, chemistry: 4, growth: 3 } },
-      { value: "quiet-planet", label: "一颗平静、宁静、祥和到像暂停键的星球", weights: { tacit: 5, chemistry: 2, growth: 4 } },
-      { value: "cosmo-city", label: "一颗文化包容、聚集着人类和外星人的大星球", weights: { tacit: 3, chemistry: 3, growth: 5 } },
+      { value: "wild-planet", label: "一颗有些危险，但充满罕见自然奇观的星球", labelEn: "A slightly dangerous planet full of rare natural wonders", weights: { tacit: 2, chemistry: 5, growth: 4 } },
+      { value: "lively-planet", label: "一颗很有烟火气、怎么逛都不会无聊的星球", labelEn: "A lively planet full of ordinary warmth and street-level life", weights: { tacit: 4, chemistry: 4, growth: 3 } },
+      { value: "quiet-planet", label: "一颗平静、宁静、祥和到像暂停键的星球", labelEn: "A calm, quiet planet that feels like a pause button", weights: { tacit: 5, chemistry: 2, growth: 4 } },
+      { value: "cosmo-city", label: "一颗文化包容、聚集着人类和外星人的大星球", labelEn: "A vast cosmopolitan planet where humans and aliens live together", weights: { tacit: 3, chemistry: 3, growth: 5 } },
     ],
   },
   {
     id: "pairDistance",
     required: true,
     prompt: "如果用宇宙中的距离去描述你和 TA，你们更像——",
+    promptEn: "If cosmic distance described you and TA, you would be closest to...",
     options: [
-      { value: "earth-moon", label: "地球和月亮的距离，始终围绕，也始终看得见", weights: { tacit: 5, chemistry: 3, growth: 4 } },
-      { value: "earth-sun", label: "地球和太阳的距离，需要刚好的远近才能长期共存", weights: { tacit: 4, chemistry: 2, growth: 5 } },
-      { value: "mars-jupiter", label: "火星和木星的距离，隔着空旷，但彼此都很有存在感", weights: { tacit: 2, chemistry: 4, growth: 3 } },
-      { value: "galaxy-edge", label: "银河两端的距离，偶尔失联，却总觉得终会再遇见", weights: { tacit: 2, chemistry: 5, growth: 2 } },
+      { value: "earth-moon", label: "地球和月亮的距离，始终围绕，也始终看得见", labelEn: "Earth and Moon: always orbiting, always visible", weights: { tacit: 5, chemistry: 3, growth: 4 } },
+      { value: "earth-sun", label: "地球和太阳的距离，需要刚好的远近才能长期共存", labelEn: "Earth and Sun: the exact distance needed to coexist", weights: { tacit: 4, chemistry: 2, growth: 5 } },
+      { value: "mars-jupiter", label: "火星和木星的距离，隔着空旷，但彼此都很有存在感", labelEn: "Mars and Jupiter: separated by space, but hard to ignore", weights: { tacit: 2, chemistry: 4, growth: 3 } },
+      { value: "galaxy-edge", label: "银河两端的距离，偶尔失联，却总觉得终会再遇见", labelEn: "Two edges of the Milky Way: sometimes lost, somehow destined to meet again", weights: { tacit: 2, chemistry: 5, growth: 2 } },
     ],
   },
 ];
@@ -239,27 +298,39 @@ QUESTIONS.dual.push(...EXTRA_DUAL_QUESTIONS);
 const ARCHETYPE_CATALOG = {
   resonance: {
     title: "同频共振",
+    titleEn: "Resonant Orbit",
     subtitle: "你们更像两束在同一片雾里发亮的光。",
+    subtitleEn: "You are like two beams of light brightening the same mist.",
   },
   complement: {
     title: "互补吸引",
+    titleEn: "Complementary Pull",
     subtitle: "不是一样，所以刚好能把彼此照亮得更完整。",
+    subtitleEn: "You are not identical, and that is exactly why you illuminate each other more fully.",
   },
   tension: {
     title: "深海拉扯",
+    titleEn: "Tidal Tension",
     subtitle: "吸引是真的，节奏差也是真的，所以这段关系有很强的问题意识。",
+    subtitleEn: "The attraction is real, and so is the difference in rhythm.",
   },
   slowburn: {
     title: "慢热成形",
+    titleEn: "Slow-Burning Orbit",
     subtitle: "它不靠立刻爆炸来证明自己，而是靠一点点稳定靠近。",
+    subtitleEn: "It proves itself not by exploding at once, but by moving closer with time.",
   },
   dualcore: {
     title: "双核并行",
+    titleEn: "Twin-Core Parallel",
     subtitle: "你们各自都很完整，真正重要的是如何对准轨道而不是互相吞没。",
+    subtitleEn: "You are each complete; the question is alignment, not absorption.",
   },
   brightshadow: {
     title: "一明一隐",
+    titleEn: "Light and Shadow",
     subtitle: "你们很容易在彼此身上看见自己不常外露的那一面。",
+    subtitleEn: "You easily recognize in each other the parts you rarely show.",
   },
 };
 
@@ -300,7 +371,7 @@ function questionLookup(questionSet, answers) {
   const labels = {};
   for (const question of questionSet) {
     const chosen = question.options.find((option) => option.value === answers[question.id]);
-    if (chosen) labels[question.id] = chosen.label;
+    if (chosen) labels[question.id] = text(chosen.label, chosen.labelEn || chosen.label);
   }
   return labels;
 }
@@ -341,6 +412,7 @@ function strongestInfluences(answers, dimension) {
     .filter(Boolean)
     .map((option) => ({
       label: option.label,
+      labelEn: option.labelEn,
       weight: option.weights?.[dimension] || 0,
     }))
     .sort((left, right) => right.weight - left.weight)
@@ -401,9 +473,20 @@ function computeSingleLineScores(userFeatures, answers) {
 }
 
 function lineInfluenceSentence(dimension, influences) {
-  const labels = influences.filter((item) => item.weight > 0).map((item) => `「${item.label}」`);
+  const labels = influences
+    .filter((item) => item.weight > 0)
+    .map((item) => `「${text(item.label, item.labelEn || item.label)}」`);
   if (!labels.length) return "";
-  const pair = labels.slice(0, 2).join("和");
+  const pair = labels.slice(0, 2).join(text("和", " and "));
+  if (isEnglish()) {
+    if (dimension === "career") {
+      return `Your answers weighted ${pair} most heavily, which lifts your Career Line through ambition, expansion, and appetite for motion.`;
+    }
+    if (dimension === "love") {
+      return `Choosing ${pair} shows that in relationships you do not simply wait; you have a very specific way of moving closer.`;
+    }
+    return `Your pull toward ${pair} makes the Energy Line depend strongly on how you recover, reset, and keep your own rhythm.`;
+  }
   if (dimension === "career") {
     return `你在 ${pair} 这些答案上给出的权重更高，说明你对成事、扩张或冒险的偏好会直接抬高事业线。`;
   }
@@ -414,6 +497,15 @@ function lineInfluenceSentence(dimension, influences) {
 }
 
 function careerFeatureSentence(features) {
+  if (isEnglish()) {
+    if (features.indicators.intensity >= 0.72 && features.radialStrength >= 0.54) {
+      return "Your iris has a strong forward push and outward radiation; once you recognize a goal, you tend to move toward it with real force.";
+    }
+    if (features.indicators.complexity >= 0.68) {
+      return "Your complexity and ring structure are high, so your ambition is not absent; it is simply more strategic and less eager to reveal itself all at once.";
+    }
+    return "Your career drive is not the loudest kind, but the foundation is solid; you do better when your energy is focused into one long route.";
+  }
   if (features.indicators.intensity >= 0.72 && features.radialStrength >= 0.54) {
     return "你的虹膜推进感和向外辐射感都很强，这类结构通常意味着你一旦确认目标，就会很敢往前推。";
   }
@@ -424,6 +516,15 @@ function careerFeatureSentence(features) {
 }
 
 function loveFeatureSentence(features) {
+  if (isEnglish()) {
+    if (features.indicators.openness >= 0.72 && features.edgeSoftness >= 0.62) {
+      return "Your iris edge is soft and open; once safety is confirmed, warmth comes out of you naturally.";
+    }
+    if (features.indicators.openness <= 0.42) {
+      return "Your feeling is not scarce; it simply enters slowly. A relationship has to prove it is worth your opening.";
+    }
+    return "Your Love Line is not extreme; it is a deep-water kind of warmth: confirm first, invest later, and stay steady once you do.";
+  }
   if (features.indicators.openness >= 0.72 && features.edgeSoftness >= 0.62) {
     return "你的虹膜边缘柔和、开放度也高，说明你一旦确认安全感，就会很自然地把温度给出去。";
   }
@@ -434,6 +535,15 @@ function loveFeatureSentence(features) {
 }
 
 function energyFeatureSentence(features) {
+  if (isEnglish()) {
+    if (features.indicators.stability >= 0.74 && features.symmetryScore >= 0.7) {
+      return "Your inner rhythm and structural balance are steady, which means you are naturally better than many people at pulling yourself back from chaos.";
+    }
+    if (features.contrastLevel >= 0.7 && features.indicators.stability <= 0.5) {
+      return "Your brightness and contrast are high; you can dive in too deeply, so the real lesson is not starting, but knowing how to land.";
+    }
+    return "Your Energy Line depends on rhythm management; once outside noise decreases, your recovery speed is not slow at all.";
+  }
   if (features.indicators.stability >= 0.74 && features.symmetryScore >= 0.7) {
     return "你的内部节拍和结构平衡都很稳，这意味着你天生就比很多人更会把自己从混乱里拉回来。";
   }
@@ -444,6 +554,20 @@ function energyFeatureSentence(features) {
 }
 
 function careerBandSentence(score) {
+  if (isEnglish()) {
+    switch (featureBand(score)) {
+      case "peak":
+        return "Your Career Line is in a strong realization zone: not just potential, but the ability to turn opportunity into outcome.";
+      case "strong":
+        return "Your Career Line is rising; outside opportunity and inner drive are starting to align, so choosing the main route matters most.";
+      case "rising":
+        return "Your Career Line has taken shape, but the breakthrough point is not fully locked; focus matters more than busyness.";
+      case "forming":
+        return "Your Career Line is still building its base; identifying a direction you can stay with will help more than sprinting blindly.";
+      default:
+        return "Your Career Line is quiet for now. That does not mean no chance; it means your core needs to thicken before the right window opens.";
+    }
+  }
   switch (featureBand(score)) {
     case "peak":
       return "你的事业线已经进入很强的兑现区间，不只是有潜力，而是真的具备把机会抓成结果的条件。";
@@ -459,6 +583,20 @@ function careerBandSentence(score) {
 }
 
 function loveBandSentence(score) {
+  if (isEnglish()) {
+    switch (featureBand(score)) {
+      case "peak":
+        return "Your Love Line is bright: you can enter connection, and you also have the energy to deepen it.";
+      case "strong":
+        return "Your Love Line is in a healthy range; closeness and space are relatively well balanced when the person is right.";
+      case "rising":
+        return "Your Love Line is present, but it cares about timing; good relationships may need one more step after you feel sure.";
+      case "forming":
+        return "Your Love Line is in a filtering phase; judging who deserves your effort matters more than becoming intense immediately.";
+      default:
+        return "Your Love Line is careful, not because you do not want love, but because you know the wrong closeness consumes you.";
+    }
+  }
   switch (featureBand(score)) {
     case "peak":
       return "你的爱情线很亮，代表你既有进入关系的能力，也有把关系真正养深的能量。";
@@ -474,6 +612,20 @@ function loveBandSentence(score) {
 }
 
 function energyBandSentence(score) {
+  if (isEnglish()) {
+    switch (featureBand(score)) {
+      case "peak":
+        return "Your Energy Line is strong: you recover well and can re-stabilize yourself even in complex environments.";
+      case "strong":
+        return "Your Energy Line is high; as long as meaningless depletion does not pile up, your inner battery is impressive.";
+      case "rising":
+        return "Your Energy Line is not weak, but it needs care, especially around people or work that give little back.";
+      case "forming":
+        return "Your Energy Line is rebuilding; routine, boundaries, and rest matter more than one burst of willpower.";
+      default:
+        return "Your Energy Line is sensitive right now; the next step is not pushing harder, but building a recovery system.";
+    }
+  }
   switch (featureBand(score)) {
     case "peak":
       return "你的能量线很强，说明你不仅恢复力好，而且在复杂环境里也能把自己重新稳住。";
@@ -489,6 +641,16 @@ function energyBandSentence(score) {
 }
 
 function lineClosingSentence(dimension, score) {
+  if (isEnglish()) {
+    if (dimension === "career") {
+      return score >= 70 ? "Next, proving yourself matters less than holding onto the opportunities that are actually worth it." : "Do not rush to match other people's speed; you need to align with your own main route first.";
+    }
+    if (dimension === "love") {
+      return score >= 70 ? "The right person will not only be attracted to you; they will also respect your rhythm."
+        : "For you, relationship quality will always matter more than relationship quantity. That is not a flaw; it is a threshold.";
+    }
+    return score >= 70 ? "The more space you leave yourself to buffer, the longer you can keep shining beautifully." : "What matters now is not pushing harder, but turning recovery into a stable daily habit.";
+  }
   if (dimension === "career") {
     return score >= 70 ? "接下来比起再证明自己，更重要的是把真正值得的机会抓紧。" : "先别急着和别人比速度，你更需要的是对准自己的主航道。";
   }
@@ -501,12 +663,20 @@ function lineClosingSentence(dimension, score) {
 
 export function buildSingleReading({ match, userFeatures, answers }) {
   const labels = questionLookup(SINGLE_QUESTIONS, answers);
-  const moodOpening = pickFrom(answers.habitat, SINGLE_MOOD_OPENINGS, "你的虹膜整体节奏并不平，它更像一段有内在起伏的宇宙纹路。");
-  const planetLine = pickFrom(answers.planet, SINGLE_PLANET_LINES, "你给自己的天体投射很明确，说明你对自己在人群中的位置并不模糊。");
-  const windowLine = pickFrom(answers.window, SINGLE_WINDOW_LINES, "你身上的很多信号不是喊出来的，而是会被真正懂的人慢慢看见。");
-  const signalLine = pickFrom(answers.signal, SINGLE_SIGNAL_LINES, "");
-  const roleLine = pickFrom(answers.role, SINGLE_ROLE_LINES, "");
-  const seed = trimNarrative(match.nebula.mainNarrativeSeed || match.nebula.singleNarrativeSeed);
+  const moodOpening = isEnglish()
+    ? pickFrom(answers.habitat, SINGLE_MOOD_OPENINGS_EN, "Your iris rhythm is not flat; it reads like a cosmic pattern with its own inner rise and fall.")
+    : pickFrom(answers.habitat, SINGLE_MOOD_OPENINGS, "你的虹膜整体节奏并不平，它更像一段有内在起伏的宇宙纹路。");
+  const planetLine = isEnglish()
+    ? pickFrom(answers.planet, SINGLE_PLANET_LINES_EN, "The celestial body you chose gives your self-image a clear gravitational center.")
+    : pickFrom(answers.planet, SINGLE_PLANET_LINES, "你给自己的天体投射很明确，说明你对自己在人群中的位置并不模糊。");
+  const windowLine = isEnglish()
+    ? pickFrom(answers.window, SINGLE_WINDOW_LINES_EN, "Many of your signals are not announced loudly; they are noticed slowly by people who know how to look.")
+    : pickFrom(answers.window, SINGLE_WINDOW_LINES, "你身上的很多信号不是喊出来的，而是会被真正懂的人慢慢看见。");
+  const signalLine = isEnglish() ? pickFrom(answers.signal, SINGLE_SIGNAL_LINES_EN, "") : pickFrom(answers.signal, SINGLE_SIGNAL_LINES, "");
+  const roleLine = isEnglish() ? pickFrom(answers.role, SINGLE_ROLE_LINES_EN, "") : pickFrom(answers.role, SINGLE_ROLE_LINES, "");
+  const seed = isEnglish()
+    ? `${nebulaName(match.nebula)} does not arrive as decoration. Its colors, textures, and luminous pressure create a visual mirror for the part of you that is hard to summarize.`
+    : trimNarrative(match.nebula.mainNarrativeSeed || match.nebula.singleNarrativeSeed);
   const lineScores = computeSingleLineScores(userFeatures, answers);
   const careerInfluences = strongestInfluences(answers, "career");
   const loveInfluences = strongestInfluences(answers, "love");
@@ -514,18 +684,20 @@ export function buildSingleReading({ match, userFeatures, answers }) {
 
   const symmetryText = describeBand(
     userFeatures.symmetryScore,
-    "你的结构并不追求完全规整，更像一团有生命力的真实纹路。",
-    "你的对称度处在舒服区间，说明你既保留了稳定，也保留了变化。",
-    "你的纹理重心很稳，这会让你给人一种情绪不乱、底盘很定的感觉。",
+    text("你的结构并不追求完全规整，更像一团有生命力的真实纹路。", "Your structure does not chase perfect order; it feels more like a living pattern with real motion."),
+    text("你的对称度处在舒服区间，说明你既保留了稳定，也保留了变化。", "Your symmetry sits in a comfortable range: stable enough to hold, alive enough to change."),
+    text("你的纹理重心很稳，这会让你给人一种情绪不乱、底盘很定的感觉。", "The center of your texture is steady, giving you the impression of someone emotionally grounded."),
   );
   const complexityText = describeBand(
     userFeatures.indicators.complexity,
-    "你不靠过度堆叠来显得丰富，反而更适合用留白表达自己。",
-    "你的层次感适中，不会让人觉得太满，却足够耐看。",
-    "你的环层感和纹理密度都偏高，说明你身上那种“不是一眼就能看懂”的部分很强。",
+    text("你不靠过度堆叠来显得丰富，反而更适合用留白表达自己。", "You do not need excessive layers to feel rich; space and restraint express you better."),
+    text("你的层次感适中，不会让人觉得太满，却足够耐看。", "Your layering is moderate: never overcrowded, but still worth looking at for longer."),
+    text("你的环层感和纹理密度都偏高，说明你身上那种“不是一眼就能看懂”的部分很强。", "Your ring signal and texture density are high, which makes you hard to fully understand at first glance."),
   );
   const shuffledOpenings = shuffleCopy([moodOpening, planetLine, windowLine, signalLine, roleLine].filter(Boolean));
-  const themeLine = `${match.nebula.titleCn || match.nebula.titleShort}会落到你这里，不只是因为颜色接近，更因为你们都带着${match.reasonSummary}。`;
+  const themeLine = isEnglish()
+    ? `${nebulaName(match.nebula)} arrives here not only because of visual resemblance, but because both of you carry ${match.reasonSummary}.`
+    : `${match.nebula.titleCn || match.nebula.titleShort}会落到你这里，不只是因为颜色接近，更因为你们都带着${match.reasonSummary}。`;
 
   const narrative = [
     shuffledOpenings[0],
@@ -543,7 +715,7 @@ export function buildSingleReading({ match, userFeatures, answers }) {
 
   const lines = [
     {
-      label: `事业线 · ${lineScores.career}分`,
+      label: text(`事业线 · ${lineScores.career}分`, `Career Line · ${lineScores.career}`),
       text: [
         careerBandSentence(lineScores.career),
         lineInfluenceSentence("career", careerInfluences),
@@ -552,7 +724,7 @@ export function buildSingleReading({ match, userFeatures, answers }) {
       ].join(""),
     },
     {
-      label: `爱情线 · ${lineScores.love}分`,
+      label: text(`爱情线 · ${lineScores.love}分`, `Love Line · ${lineScores.love}`),
       text: [
         loveBandSentence(lineScores.love),
         lineInfluenceSentence("love", loveInfluences),
@@ -561,7 +733,7 @@ export function buildSingleReading({ match, userFeatures, answers }) {
       ].join(""),
     },
     {
-      label: `能量线 · ${lineScores.energy}分`,
+      label: text(`能量线 · ${lineScores.energy}分`, `Energy Line · ${lineScores.energy}`),
       text: [
         energyBandSentence(lineScores.energy),
         lineInfluenceSentence("energy", energyInfluences),
@@ -573,44 +745,59 @@ export function buildSingleReading({ match, userFeatures, answers }) {
 
   const metrics = [
     {
-      label: "对称感",
+      label: text("对称感", "Symmetry"),
       value: toPercent(userFeatures.symmetryScore),
-      text: userFeatures.symmetryScore >= 0.7 ? "稳定底盘" : userFeatures.symmetryScore >= 0.45 ? "稳中带波动" : "更偏流动感",
+      text: userFeatures.symmetryScore >= 0.7 ? text("稳定底盘", "Stable foundation") : userFeatures.symmetryScore >= 0.45 ? text("稳中带波动", "Stable with motion") : text("更偏流动感", "More fluid"),
     },
     {
-      label: "环层感",
-      value: `${userFeatures.ringCount} 层`,
-      text: userFeatures.ringCount >= 3 ? "层次明显" : userFeatures.ringCount === 2 ? "有轻微叠层" : "更偏单层直觉",
+      label: text("环层感", "Ring Signal"),
+      value: text(`${userFeatures.ringCount} 层`, `${userFeatures.ringCount} layers`),
+      text: userFeatures.ringCount >= 3 ? text("层次明显", "Clearly layered") : userFeatures.ringCount === 2 ? text("有轻微叠层", "Lightly layered") : text("更偏单层直觉", "Single-layer intuition"),
     },
     {
-      label: "纹理密度",
+      label: text("纹理密度", "Texture Density"),
       value: toPercent(userFeatures.textureDensity),
-      text: userFeatures.textureDensity >= 0.7 ? "细节丰盛" : userFeatures.textureDensity >= 0.42 ? "密度适中" : "留白偏多",
+      text: userFeatures.textureDensity >= 0.7 ? text("细节丰盛", "Detail-rich") : userFeatures.textureDensity >= 0.42 ? text("密度适中", "Moderate density") : text("留白偏多", "More negative space"),
     },
     {
-      label: "辐射感",
+      label: text("辐射感", "Radiance"),
       value: toPercent(userFeatures.radialStrength),
-      text: userFeatures.radialStrength >= 0.56 ? "向外生长" : userFeatures.radialStrength >= 0.42 ? "收放平衡" : "更偏内聚",
+      text: userFeatures.radialStrength >= 0.56 ? text("向外生长", "Growing outward") : userFeatures.radialStrength >= 0.42 ? text("收放平衡", "Balanced expansion") : text("更偏内聚", "More inward"),
     },
   ];
 
   const reasons = [
-    `主色调与 ${match.nebula.titleCn || match.nebula.titleShort} 的 ${match.nebula.hue_family === "warm" ? "暖雾" : match.nebula.hue_family === "cool" ? "冷光" : "中性星云"} 气质靠近`,
-    `你的虹膜呈现 ${match.reasonSummary}`,
-    `三条线当前分布为：事业 ${lineScores.career} / 爱情 ${lineScores.love} / 能量 ${lineScores.energy}`,
-    `${labels.planet || "这颗天体投射"} 和 ${labels.role || "你给自己的飞船角色"} 明显拉动了结果的叙事方向`,
+    isEnglish()
+      ? `Your main hue is close to the ${match.nebula.hue_family === "warm" ? "warm mist" : match.nebula.hue_family === "cool" ? "cool glow" : "neutral nebula"} atmosphere of ${nebulaName(match.nebula)}`
+      : `主色调与 ${match.nebula.titleCn || match.nebula.titleShort} 的 ${match.nebula.hue_family === "warm" ? "暖雾" : match.nebula.hue_family === "cool" ? "冷光" : "中性星云"} 气质靠近`,
+    isEnglish() ? `Your iris shows ${match.reasonSummary}` : `你的虹膜呈现 ${match.reasonSummary}`,
+    isEnglish()
+      ? `The three lines currently read: Career ${lineScores.career} / Love ${lineScores.love} / Energy ${lineScores.energy}`
+      : `三条线当前分布为：事业 ${lineScores.career} / 爱情 ${lineScores.love} / 能量 ${lineScores.energy}`,
+    isEnglish()
+      ? `${labels.planet || "Your planet choice"} and ${labels.role || "your ship role"} clearly pull the narrative direction`
+      : `${labels.planet || "这颗天体投射"} 和 ${labels.role || "你给自己的飞船角色"} 明显拉动了结果的叙事方向`,
   ];
 
-  const shareCaption = `我在虹膜宇宙里匹配到了${match.nebula.titleCn || match.nebula.titleShort}，事业线${lineScores.career}分、爱情线${lineScores.love}分、能量线${lineScores.energy}分。`;
+  const shareCaption = isEnglish()
+    ? `I matched with ${nebulaName(match.nebula)} in Iris Universe: Career ${lineScores.career}, Love ${lineScores.love}, Energy ${lineScores.energy}.`
+    : `我在虹膜宇宙里匹配到了${match.nebula.titleCn || match.nebula.titleShort}，事业线${lineScores.career}分、爱情线${lineScores.love}分、能量线${lineScores.energy}分。`;
 
   return {
-    headline: `${match.nebula.titleCn || match.nebula.titleShort}正在等你`,
+    headline: isEnglish() ? `${nebulaName(match.nebula)} is waiting for you` : `${match.nebula.titleCn || match.nebula.titleShort}正在等你`,
     narrative,
     lines,
     metrics,
     reasons,
-    spaceMessage: `${match.nebula.cosmicFact} 而你此刻的心，也刚好被这一束光认出来。`,
+    spaceMessage: isEnglish()
+      ? `${nebulaFact(match.nebula)} At this moment, something in you is recognized by that light.`
+      : `${match.nebula.cosmicFact} 而你此刻的心，也刚好被这一束光认出来。`,
     shareCaption,
+    shareLabels: {
+      matchRate: text("匹配率", "Match"),
+      tagline: text("真实星云图像 x 可解释虹膜匹配", "Real NASA imagery x explainable iris matching"),
+      cta: text("扫描你的眼睛，找到你的星云。", "Scan your eye. Find your nebula."),
+    },
   };
 }
 
@@ -632,6 +819,7 @@ function strongestDualInfluences(questionSet, answers, dimension) {
     .filter((option) => option?.weights)
     .map((option) => ({
       label: option.label,
+      labelEn: option.labelEn,
       weight: option.weights?.[dimension] || 0,
     }))
     .sort((left, right) => right.weight - left.weight)
@@ -687,6 +875,40 @@ function computeDualLineScores({ relation, answers, questionSet, leftFeatures, r
 }
 
 function dualBandSentence(dimension, score) {
+  if (isEnglish()) {
+    switch (featureBand(score)) {
+      case "peak":
+        return dimension === "tacit"
+          ? "Your Tacit Line is extremely high; much can be understood before it is fully said."
+          : dimension === "chemistry"
+            ? "Your Attraction Line is bright; the relationship carries obvious pull, not just mild interest."
+            : "Your Growth Line is strong; this bond can move both of you forward, not merely happen and fade.";
+      case "strong":
+        return dimension === "tacit"
+          ? "Your Tacit Line is steadily high; the rare part is learning how to preserve that understanding over time."
+          : dimension === "chemistry"
+            ? "Your Attraction Line sits in a healthy range, balancing familiarity with freshness."
+            : "Your Growth Line has already taken shape; as long as the direction stays aligned, it has real afterglow.";
+      case "rising":
+        return dimension === "tacit"
+          ? "Your Tacit Line is still rising; the moments of truly getting each other will appear through concrete situations."
+          : dimension === "chemistry"
+            ? "Your Attraction Line is not explosive; it keeps surfacing between closeness and looking back."
+            : "Your Growth Line needs time to ferment; shared language built slowly will last longer than instant heat.";
+      case "forming":
+        return dimension === "tacit"
+          ? "Your Tacit Line is still being built, needing more expression and alignment before it becomes reliable."
+          : dimension === "chemistry"
+            ? "Your Attraction Line is exploratory; many feelings only appear once the two of you are inside the same scene."
+            : "Your Growth Line is at the starting point; do not define the ending too early, first see whether you can travel together.";
+      default:
+        return dimension === "tacit"
+          ? "Your Tacit Line is light for now; more confirmation can turn a vague feeling into a dependable structure."
+          : dimension === "chemistry"
+            ? "Your Attraction Line is more like an undertow: it may not burst open immediately, but it appears in small gestures."
+            : "Your Growth Line is quiet now; the key is not instant heat, but whether continuity can form.";
+    }
+  }
   switch (featureBand(score)) {
     case "peak":
       return dimension === "tacit"
@@ -722,9 +944,20 @@ function dualBandSentence(dimension, score) {
 }
 
 function dualInfluenceSentence(dimension, influences) {
-  const labels = influences.filter((item) => item.weight > 0).map((item) => `「${item.label}」`);
+  const labels = influences
+    .filter((item) => item.weight > 0)
+    .map((item) => `「${text(item.label, item.labelEn || item.label)}」`);
   if (!labels.length) return "";
-  const pair = labels.slice(0, 2).join("和");
+  const pair = labels.slice(0, 2).join(text("和", " and "));
+  if (isEnglish()) {
+    if (dimension === "tacit") {
+      return `You weighted ${pair} most heavily, which means this relationship depends on whether you can catch each other's rhythm and direction.`;
+    }
+    if (dimension === "chemistry") {
+      return `You gave more weight to ${pair}, so spark, flirtation, and magnetic pull become more visible in this bond.`;
+    }
+    return `You repeatedly chose future-facing answers like ${pair}, so the Growth Line naturally rises.`;
+  }
   if (dimension === "tacit") {
     return `你们在 ${pair} 这些选择上投得最重，说明这段关系真正被你们看重的，是能不能接住彼此的节拍和方向。`;
   }
@@ -735,6 +968,16 @@ function dualInfluenceSentence(dimension, influences) {
 }
 
 function tacitFeatureSentence(leftFeatures, rightFeatures, relation) {
+  if (isEnglish()) {
+    const stabilityAverage = (leftFeatures.indicators.stability + rightFeatures.indicators.stability) / 2;
+    if (relation.similarity >= 0.74 && stabilityAverage >= 0.64) {
+      return "Your texture rhythms are close, and both inner structures are stable, so you can form a default understanding without over-explaining.";
+    }
+    if (relation.rhythmGap >= 0.42) {
+      return "It is not that you cannot understand each other; the timing simply slips, so tacit understanding becomes a trained ability.";
+    }
+    return "Your tacit bond is not miraculous synchronization; it is something that accumulates each time you move closer.";
+  }
   const stabilityAverage = (leftFeatures.indicators.stability + rightFeatures.indicators.stability) / 2;
   if (relation.similarity >= 0.74 && stabilityAverage >= 0.64) {
     return "你们的纹理节拍接近，而且两个人的内部稳定度都不低，所以相处时很容易形成一种不用反复解释的默认值。";
@@ -746,6 +989,16 @@ function tacitFeatureSentence(leftFeatures, rightFeatures, relation) {
 }
 
 function chemistryFeatureSentence(leftFeatures, rightFeatures, relation) {
+  if (isEnglish()) {
+    const intensityAverage = (leftFeatures.indicators.intensity + rightFeatures.indicators.intensity) / 2;
+    if (relation.complement >= 0.72) {
+      return "The most attractive part is exactly where you differ; closeness brings a fresh, slightly addictive tension.";
+    }
+    if (intensityAverage >= 0.68 && relation.resonance >= 0.64) {
+      return "Neither of you is low-visibility, so once you reflect each other, the chemistry becomes more obvious than in ordinary bonds.";
+    }
+    return "The attraction is more like a current than a flood; it may not fill the room immediately, but it keeps appearing in small scenes.";
+  }
   const intensityAverage = (leftFeatures.indicators.intensity + rightFeatures.indicators.intensity) / 2;
   if (relation.complement >= 0.72) {
     return "你们最有吸引力的地方，恰恰是彼此不完全相同的部分，所以靠近时会有一种新鲜而上头的张力。";
@@ -757,6 +1010,16 @@ function chemistryFeatureSentence(leftFeatures, rightFeatures, relation) {
 }
 
 function growthFeatureSentence(leftFeatures, rightFeatures, relation) {
+  if (isEnglish()) {
+    const complexityAverage = (leftFeatures.indicators.complexity + rightFeatures.indicators.complexity) / 2;
+    if (relation.rhythmGap <= 0.24 && relation.resonance >= 0.68) {
+      return "Your rhythm gap is small and resonance is high, giving this relationship natural conditions for long-distance movement.";
+    }
+    if (complexityAverage >= 0.64) {
+      return "Neither of you is built for surface-level connection, so the real growth potential hides after the bond becomes deeper.";
+    }
+    return "The growth of this relationship is not decided in one instant; it depends on whether you keep adjusting after real collisions.";
+  }
   const complexityAverage = (leftFeatures.indicators.complexity + rightFeatures.indicators.complexity) / 2;
   if (relation.rhythmGap <= 0.24 && relation.resonance >= 0.68) {
     return "你们的节奏差不大，共振值也高，所以这段关系天然具备一起往远处走的条件。";
@@ -769,6 +1032,24 @@ function growthFeatureSentence(leftFeatures, rightFeatures, relation) {
 
 function resolveRelationshipName({ lineScores, relation, identities, answers }) {
   const combo = resolveIdentityCombo(identities);
+  if (isEnglish()) {
+    if (combo === "male-male" && answers.pairEaster === "dad") return "I Am Your Dad";
+    if (combo === "male-female" && answers.pairEaster === "steady") return "Unbreakable Inter-Orbital Love";
+    if (combo === "female-female" && answers.pairEaster === "mom") return "Call Me Mom";
+    if (lineScores.tacit >= 82 && lineScores.growth >= 78 && lineScores.chemistry >= 60) return "Old-Soul Couple";
+    if (lineScores.chemistry >= 84 && lineScores.growth >= 66) return "Sweet Little Lovers";
+    if (lineScores.tacit >= 78 && lineScores.chemistry < 55) {
+      if (combo === "male-male") return "Plastic Brotherhood";
+      if (combo === "female-female") return "Plastic Sisterhood";
+      return "Stubborn Besties";
+    }
+    if (lineScores.chemistry >= 80 && lineScores.tacit < 58) return "Infatuation Pilot";
+    if (lineScores.growth >= 80) return "Voyage Symbiotes";
+    if (relation.archetype === "brightshadow") return "Roasting Accomplices";
+    if (relation.archetype === "complement") return "Soul Accomplices";
+    if (relation.archetype === "slowburn") return "Slow-Burn Partners";
+    return "Twin-Core Partners";
+  }
   if (combo === "male-male" && answers.pairEaster === "dad") return "我是你爸爸";
   if (combo === "male-female" && answers.pairEaster === "steady") return "情比金坚的异球恋";
   if (combo === "female-female" && answers.pairEaster === "mom") return "叫妈妈";
@@ -799,42 +1080,69 @@ export function buildDualReading({ relation, answers, leftMatch, rightMatch, lef
   const growthInfluences = strongestDualInfluences(questionSet, answers, "growth");
   const relationshipName = resolveRelationshipName({ lineScores, relation, identities, answers });
 
-  const orbitOpening = {
-    "twin-star": "你们更像月球绕着地球旋转那样的关系，一方会更自然地靠近，另一方则像一个稳定存在的引力中心。",
-    slingshot: "你们像流星划过地球夜空，一旦相交就会留下强烈痕迹，所以这段关系最迷人的地方是短暂也足够亮。",
-    relay: "你们更像两颗星体围绕同一个核心天体运转，不一定永远正面相撞，但会在同一个系统里反复看见彼此。",
-    "nebula-drift": "你们像某种还没被探测出规律的运动，谁也说不准下一次相遇会在什么时候，却总觉得它迟早会发生。",
-  }[answers.pairOrbit] || "你们不是一眼能下定义的那种关系，而是越看越会发现它内部其实有自己的轨道。";
+  const orbitOpening = isEnglish()
+    ? {
+        "twin-star": "Your bond is like the Moon orbiting Earth: one side moves closer naturally, while the other becomes a steady gravitational center.",
+        slingshot: "You are like a meteor crossing Earth's night sky: once you meet, the trace is brief but bright enough to stay.",
+        relay: "You are more like two bodies orbiting the same center: not always colliding face to face, but repeatedly visible inside the same system.",
+        "nebula-drift": "You move like an orbit whose law has not yet been discovered; no one knows when the next crossing comes, yet it feels inevitable.",
+      }[answers.pairOrbit] || "This relationship cannot be defined at first glance; the longer you look, the more its inner orbit appears."
+    : {
+        "twin-star": "你们更像月球绕着地球旋转那样的关系，一方会更自然地靠近，另一方则像一个稳定存在的引力中心。",
+        slingshot: "你们像流星划过地球夜空，一旦相交就会留下强烈痕迹，所以这段关系最迷人的地方是短暂也足够亮。",
+        relay: "你们更像两颗星体围绕同一个核心天体运转，不一定永远正面相撞，但会在同一个系统里反复看见彼此。",
+        "nebula-drift": "你们像某种还没被探测出规律的运动，谁也说不准下一次相遇会在什么时候，却总觉得它迟早会发生。",
+      }[answers.pairOrbit] || "你们不是一眼能下定义的那种关系，而是越看越会发现它内部其实有自己的轨道。";
 
-  const needLine = {
-    radar: "如果最不会被拒绝的邀约是一起去酒吧小酌一杯，说明你们之间最自然的靠近方式是松弛地交换情绪和近况。",
-    spark: "如果你第一反应是一起去健身房动一动，说明这段关系对你来说不是只适合谈心，还适合一起把身体和冲劲都点热。",
-    map: "如果你最想约对方去舷窗边看地球重新亮起来，说明你们之间真正动人的，不只是相处本身，还有一起看向未来的能力。",
-    cabin: "如果你觉得连邀约都没有必要，直接去休眠舱就行，说明你们的熟悉度已经高到不需要额外开场，安静待着都不尴尬。",
-  }[answers.pairNeed] || "";
+  const needLine = isEnglish()
+    ? {
+        radar: "If the invitation least likely to be refused is a quiet drink, your most natural closeness comes through relaxed emotional exchange.",
+        spark: "If your first impulse is a workout together, this bond is not only for talking; it also wakes up movement, body, and momentum.",
+        map: "If you want to watch Earth light up again together, the touching part is not just company, but the ability to face a future side by side.",
+        cabin: "If no invitation is needed and sleep pods are enough, the familiarity is high enough that silence does not feel awkward.",
+      }[answers.pairNeed] || ""
+    : {
+        radar: "如果最不会被拒绝的邀约是一起去酒吧小酌一杯，说明你们之间最自然的靠近方式是松弛地交换情绪和近况。",
+        spark: "如果你第一反应是一起去健身房动一动，说明这段关系对你来说不是只适合谈心，还适合一起把身体和冲劲都点热。",
+        map: "如果你最想约对方去舷窗边看地球重新亮起来，说明你们之间真正动人的，不只是相处本身，还有一起看向未来的能力。",
+        cabin: "如果你觉得连邀约都没有必要，直接去休眠舱就行，说明你们的熟悉度已经高到不需要额外开场，安静待着都不尴尬。",
+      }[answers.pairNeed] || "";
 
-  const sceneLine = {
-    aurora: "你说对方的眼睛更像宇宙的深邃，这说明你感受到的首先不是表面的热闹，而是一种很深、很稳、会让人想继续看下去的引力。",
-    rift: "你觉得那双眼睛更像黑洞和暗物质之间的危险与神秘，说明这段关系里天生就带着一点高风险却很难回头的吸引。",
-    harbor: "你从对方眼里看见的是很远的星光回到身边的温柔，所以这段关系最强的不是刺激，而是可回返、可停靠、可被安放。",
-    meteor: "你把对方的眼睛联想到星际大冒险的探索与冒险，说明你感受到的不是平静，而是一种会把人往未知推过去的邀请。",
-  }[answers.pairScene] || "";
+  const sceneLine = isEnglish()
+    ? {
+        aurora: "Seeing cosmic depth in TA's eye means what you feel first is not surface excitement, but a deep, steady gravity that makes you keep looking.",
+        rift: "If TA's eye feels like the danger between a black hole and dark matter, this relationship carries a high-risk pull that is hard to turn away from.",
+        harbor: "If you see faraway starlight returning gently, the strongest part is not stimulation, but the feeling of return, harbor, and being held.",
+        meteor: "If TA's eye suggests interstellar adventure, what you feel is not calm, but an invitation pushing you toward the unknown.",
+      }[answers.pairScene] || ""
+    : {
+        aurora: "你说对方的眼睛更像宇宙的深邃，这说明你感受到的首先不是表面的热闹，而是一种很深、很稳、会让人想继续看下去的引力。",
+        rift: "你觉得那双眼睛更像黑洞和暗物质之间的危险与神秘，说明这段关系里天生就带着一点高风险却很难回头的吸引。",
+        harbor: "你从对方眼里看见的是很远的星光回到身边的温柔，所以这段关系最强的不是刺激，而是可回返、可停靠、可被安放。",
+        meteor: "你把对方的眼睛联想到星际大冒险的探索与冒险，说明你感受到的不是平静，而是一种会把人往未知推过去的邀请。",
+      }[answers.pairScene] || "";
 
   const narrative = [
     orbitOpening,
     needLine,
     sceneLine,
-    `从结构上看，你们更接近「${archetype.title}」：一边的纹理在${relation.similarityLabel}，另一边的靠近方式在${relation.complementLabel}。`,
-    `左边的${leftMatch.nebula.titleCn || leftMatch.nebula.titleShort}和右边的${rightMatch.nebula.titleCn || rightMatch.nebula.titleShort}，像两种不同的星云秩序在互相试探，但并没有彼此抵消，反而在找新的共轨方式。`,
-    `如果一定要给这段关系一个更像人话的名字，它现在更接近「${relationshipName}」。`,
-    archetype.subtitle,
+    isEnglish()
+      ? `Structurally, you are closer to 「${archetype.titleEn}」: one side shows ${relation.similarityLabel}, while the way you approach each other shows ${relation.complementLabel}.`
+      : `从结构上看，你们更接近「${archetype.title}」：一边的纹理在${relation.similarityLabel}，另一边的靠近方式在${relation.complementLabel}。`,
+    isEnglish()
+      ? `The left-side ${nebulaName(leftMatch.nebula)} and the right-side ${nebulaName(rightMatch.nebula)} feel like two nebular orders testing each other, not canceling out, but searching for a new shared orbit.`
+      : `左边的${leftMatch.nebula.titleCn || leftMatch.nebula.titleShort}和右边的${rightMatch.nebula.titleCn || rightMatch.nebula.titleShort}，像两种不同的星云秩序在互相试探，但并没有彼此抵消，反而在找新的共轨方式。`,
+    isEnglish()
+      ? `If this relationship needs a human name, it currently comes closest to 「${relationshipName}」.`
+      : `如果一定要给这段关系一个更像人话的名字，它现在更接近「${relationshipName}」。`,
+    text(archetype.subtitle, archetype.subtitleEn),
   ]
     .filter(Boolean)
     .join("");
 
   const lines = [
     {
-      label: `默契线 · ${lineScores.tacit}分`,
+      label: text(`默契线 · ${lineScores.tacit}分`, `Tacit Line · ${lineScores.tacit}`),
       text: [
         dualBandSentence("tacit", lineScores.tacit),
         dualInfluenceSentence("tacit", tacitInfluences),
@@ -842,7 +1150,7 @@ export function buildDualReading({ relation, answers, leftMatch, rightMatch, lef
       ].join(""),
     },
     {
-      label: `吸引线 · ${lineScores.chemistry}分`,
+      label: text(`吸引线 · ${lineScores.chemistry}分`, `Attraction Line · ${lineScores.chemistry}`),
       text: [
         dualBandSentence("chemistry", lineScores.chemistry),
         dualInfluenceSentence("chemistry", chemistryInfluences),
@@ -850,7 +1158,7 @@ export function buildDualReading({ relation, answers, leftMatch, rightMatch, lef
       ].join(""),
     },
     {
-      label: `成长线 · ${lineScores.growth}分`,
+      label: text(`成长线 · ${lineScores.growth}分`, `Growth Line · ${lineScores.growth}`),
       text: [
         dualBandSentence("growth", lineScores.growth),
         dualInfluenceSentence("growth", growthInfluences),
@@ -860,41 +1168,59 @@ export function buildDualReading({ relation, answers, leftMatch, rightMatch, lef
   ];
 
   const metrics = [
-    { label: "同频度", value: toPercent(relation.similarity), text: relation.similarityLabel },
-    { label: "互补度", value: toPercent(relation.complement), text: relation.complementLabel },
-    { label: "节奏差", value: toPercent(relation.rhythmGap), text: relation.rhythmLabel },
-    { label: "关系名", value: relationshipName, text: archetype.title },
+    { label: text("同频度", "Sync"), value: toPercent(relation.similarity), text: relation.similarityLabel },
+    { label: text("互补度", "Complement"), value: toPercent(relation.complement), text: relation.complementLabel },
+    { label: text("节奏差", "Rhythm Gap"), value: toPercent(relation.rhythmGap), text: relation.rhythmLabel },
+    { label: text("关系名", "Relationship Name"), value: relationshipName, text: text(archetype.title, archetype.titleEn) },
   ];
 
   const reasons = [
-    `三条线当前分布为：默契 ${lineScores.tacit} / 吸引 ${lineScores.chemistry} / 成长 ${lineScores.growth}`,
-    `你们给这段关系投出的主问题答案分别是 ${labels.pairOrbit || "共轨"}、${labels.pairNeed || "守护"}、${labels.pairScene || "同看一片天"}`,
-    easterQuestion && answers.pairEaster ? `隐藏题触发后，这段关系还露出了 ${labels.pairEaster} 的侧面` : `它最终会落到 ${relationshipName} 这个名字上，不只是因为像，而是因为分数结构真的朝这个方向倾斜`,
+    isEnglish()
+      ? `The three lines currently read: Tacit ${lineScores.tacit} / Attraction ${lineScores.chemistry} / Growth ${lineScores.growth}`
+      : `三条线当前分布为：默契 ${lineScores.tacit} / 吸引 ${lineScores.chemistry} / 成长 ${lineScores.growth}`,
+    isEnglish()
+      ? `Your main answers were ${labels.pairOrbit || "shared orbit"}, ${labels.pairNeed || "invitation"}, and ${labels.pairScene || "shared sky"}`
+      : `你们给这段关系投出的主问题答案分别是 ${labels.pairOrbit || "共轨"}、${labels.pairNeed || "守护"}、${labels.pairScene || "同看一片天"}`,
+    easterQuestion && answers.pairEaster
+      ? isEnglish()
+        ? `The hidden question also revealed the ${labels.pairEaster} side of this relationship`
+        : `隐藏题触发后，这段关系还露出了 ${labels.pairEaster} 的侧面`
+      : isEnglish()
+        ? `The result lands on ${relationshipName} because the score structure leans in that direction`
+        : `它最终会落到 ${relationshipName} 这个名字上，不只是因为像，而是因为分数结构真的朝这个方向倾斜`,
     relation.cosmicAdvice,
   ];
 
-  const shareCaption = `我和TA在虹膜宇宙里测出了「${relationshipName}」：默契线${lineScores.tacit}分、吸引线${lineScores.chemistry}分、成长线${lineScores.growth}分。`;
+  const shareCaption = isEnglish()
+    ? `TA and I got 「${relationshipName}」 in Iris Universe: Tacit ${lineScores.tacit}, Attraction ${lineScores.chemistry}, Growth ${lineScores.growth}.`
+    : `我和TA在虹膜宇宙里测出了「${relationshipName}」：默契线${lineScores.tacit}分、吸引线${lineScores.chemistry}分、成长线${lineScores.growth}分。`;
 
   return {
     headline: relationshipName,
-    subtitle: archetype.title,
+    subtitle: text(archetype.title, archetype.titleEn),
     narrative,
     lines,
     metrics,
     reasons,
     relationshipName,
     shareCaption,
+    shareLabels: {
+      resonance: text("关系共振", "Resonance"),
+      leftNebula: text("左眼星云", "Left Nebula"),
+      rightNebula: text("右眼星云", "Right Nebula"),
+      cta: text("在虹膜宇宙里，看见你们的关系轨道。", "See your shared orbit in Iris Universe."),
+    },
   };
 }
 
 export function buildFeatureReasonSummary(features) {
   const parts = [];
-  if (features.radialStrength >= 0.54) parts.push("很强的向外辐射感");
-  if (features.ringCount >= 3) parts.push("层层展开的环纹");
-  if (features.symmetryScore >= 0.7) parts.push("相对稳定的结构平衡");
-  if (features.edgeSoftness >= 0.62) parts.push("柔和而有雾感的边缘");
-  if (features.textureDensity >= 0.7) parts.push("细密但不凌乱的纹理");
-  return parts.slice(0, 2).join("和") || "一种不急着说明自己的内在秩序";
+  if (features.radialStrength >= 0.54) parts.push(text("很强的向外辐射感", "a strong outward radiance"));
+  if (features.ringCount >= 3) parts.push(text("层层展开的环纹", "rings unfolding in layers"));
+  if (features.symmetryScore >= 0.7) parts.push(text("相对稳定的结构平衡", "a relatively stable structural balance"));
+  if (features.edgeSoftness >= 0.62) parts.push(text("柔和而有雾感的边缘", "soft, mist-like edges"));
+  if (features.textureDensity >= 0.7) parts.push(text("细密但不凌乱的纹理", "fine texture without chaos"));
+  return parts.slice(0, 2).join(text("和", " and ")) || text("一种不急着说明自己的内在秩序", "an inner order that does not rush to explain itself");
 }
 
 export function describeFeaturePill(label, value) {

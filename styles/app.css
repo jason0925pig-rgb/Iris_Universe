@@ -108,6 +108,42 @@ img {
   color: var(--muted);
 }
 
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.language-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 10px 7px 14px;
+  font-size: 0.82rem;
+}
+
+.language-select select {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  padding: 6px 28px 6px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.language-select select:focus {
+  outline: 2px solid rgba(145, 219, 255, 0.45);
+  outline-offset: 2px;
+}
+
 .ghost-link {
   appearance: none;
   border: 1px solid var(--line);
@@ -1355,6 +1391,11 @@ img {
   .app-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .hero {

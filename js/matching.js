@@ -1,4 +1,5 @@
-import { buildFeatureReasonSummary } from "./content.js";
+import { buildFeatureReasonSummary } from "./content.js?v=20260503a";
+import { text } from "./i18n.js?v=20260503a";
 
 function clamp(value, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value));
@@ -239,21 +240,21 @@ function deriveComplement(a, b) {
 }
 
 function describeSimilarity(score) {
-  if (score >= 0.74) return "纹理节奏高度同步";
-  if (score >= 0.54) return "有明显的相似频段";
-  return "并不天然同频";
+  if (score >= 0.74) return text("纹理节奏高度同步", "highly synchronized texture rhythm");
+  if (score >= 0.54) return text("有明显的相似频段", "a clear shared frequency band");
+  return text("并不天然同频", "not naturally on the same frequency");
 }
 
 function describeComplement(score) {
-  if (score >= 0.74) return "差异刚好能形成吸引";
-  if (score >= 0.54) return "有互补的空间";
-  return "互补感并不算主导";
+  if (score >= 0.74) return text("差异刚好能形成吸引", "differences that create attraction");
+  if (score >= 0.54) return text("有互补的空间", "room for complementarity");
+  return text("互补感并不算主导", "complementarity is not the main force");
 }
 
 function describeRhythm(score) {
-  if (score >= 0.46) return "需要主动调时差";
-  if (score >= 0.28) return "偶尔会出现拍子不一致";
-  return "整体节拍相对稳定";
+  if (score >= 0.46) return text("需要主动调时差", "needs active rhythm adjustment");
+  if (score >= 0.28) return text("偶尔会出现拍子不一致", "occasionally falls out of beat");
+  return text("整体节拍相对稳定", "overall rhythm is relatively stable");
 }
 
 function pickArchetype(similarity, complement, rhythmGap, a, b) {
@@ -301,11 +302,14 @@ export function buildDualRelation(leftFeatures, rightFeatures, answers) {
   const archetype = pickArchetype(similarity, complement, rhythmGap, leftFeatures, rightFeatures);
   const matchRate = relationToMatchRate(resonance, similarity, complement, rhythmGap);
 
-  let cosmicAdvice = "真正适合你们的，不是零冲突，而是冲突之后还能重新回到同一片天幕。";
-  if (archetype === "complement") cosmicAdvice = "别急着把彼此磨成一样，差异正是这段关系的光源。";
-  if (archetype === "slowburn") cosmicAdvice = "慢一点不是没感觉，而是这段关系更适合把时间变成证据。";
-  if (archetype === "tension") cosmicAdvice = "当吸引和节奏差并存时，边界会比情绪更重要。";
-  if (archetype === "brightshadow") cosmicAdvice = "你们会在彼此身上看见自己不常外露的部分，所以靠近也会带一点轻微眩晕。";
+  let cosmicAdvice = text(
+    "真正适合你们的，不是零冲突，而是冲突之后还能重新回到同一片天幕。",
+    "What truly suits you is not zero conflict, but the ability to return to the same sky after conflict.",
+  );
+  if (archetype === "complement") cosmicAdvice = text("别急着把彼此磨成一样，差异正是这段关系的光源。", "Do not rush to make each other identical; difference is the light source of this bond.");
+  if (archetype === "slowburn") cosmicAdvice = text("慢一点不是没感觉，而是这段关系更适合把时间变成证据。", "Slower does not mean weaker; this bond is better at turning time into evidence.");
+  if (archetype === "tension") cosmicAdvice = text("当吸引和节奏差并存时，边界会比情绪更重要。", "When attraction and rhythm gap coexist, boundaries matter more than emotion.");
+  if (archetype === "brightshadow") cosmicAdvice = text("你们会在彼此身上看见自己不常外露的部分，所以靠近也会带一点轻微眩晕。", "You will see in each other the parts you rarely show, so closeness can feel slightly dizzy.");
 
   return {
     similarity: clamp(similarity),
