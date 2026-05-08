@@ -156,7 +156,7 @@ export const QUESTIONS = {
       title: "必答 2",
       titleEn: "Required 2",
       prompt: "人类到了宇宙大航海时代，当你和 TA 在同一艘宇宙飞船返回地球家园的时候，你对 TA 发出什么样的邀约，你觉得 TA 最不会拒绝？",
-      promptEn: "In the age of cosmic voyages, you and TA are returning to Earth on the same spacecraft. What invitation would TA be least likely to refuse?",
+      promptEn: "In the age of cosmic voyages, you and the other person are returning to Earth on the same spacecraft. What invitation would they be least likely to refuse?",
       options: [
         { value: "radar", label: "一起去酒吧小酌一杯", labelEn: "A quiet drink at a bar", weights: { tacit: 5, chemistry: 2, growth: 4 } },
         { value: "spark", label: "一起去健身房健身一下", labelEn: "A workout together", weights: { tacit: 2, chemistry: 5, growth: 2 } },
@@ -170,7 +170,7 @@ export const QUESTIONS = {
       title: "必答 3",
       titleEn: "Required 3",
       prompt: "对方的眼睛给你的感觉是什么？",
-      promptEn: "What does TA's eye make you feel?",
+      promptEn: "What does the other person's eye make you feel?",
       options: [
         { value: "aurora", label: "宇宙的深邃", labelEn: "Cosmic depth", weights: { tacit: 5, chemistry: 3, growth: 3 } },
         { value: "meteor", label: "星际大冒险的探索与冒险", labelEn: "The thrill of an interstellar adventure", weights: { tacit: 2, chemistry: 4, growth: 4 } },
@@ -188,7 +188,7 @@ const DUAL_EASTER_QUESTIONS = {
     title: "隐藏 4",
     titleEn: "Hidden 4",
     prompt: "当你们又见面了的时候，当你认真看向对方的眼睛的时候，你会想什么？",
-    promptEn: "When you meet again and look seriously into TA's eyes, what comes to mind?",
+    promptEn: "When you meet again and look seriously into their eyes, what comes to mind?",
     options: [
       { value: "dad", label: "你爹来喽", labelEn: "Your dad has arrived" },
       { value: "save", label: "又能并肩狠狠干一场了", labelEn: "We get to fight side by side again" },
@@ -202,7 +202,7 @@ const DUAL_EASTER_QUESTIONS = {
     title: "隐藏 4",
     titleEn: "Hidden 4",
     prompt: "当你们快要分别的时候，当你看向对方的眼睛，你会想什么？",
-    promptEn: "When you are about to part and look into TA's eyes, what do you think?",
+    promptEn: "When you are about to part and look into their eyes, what do you think?",
     options: [
       { value: "steady", label: "感觉很平静，我们马上就会再见面了", labelEn: "It feels peaceful; we will see each other again soon" },
       { value: "tease", label: "还是会有一点舍不得", labelEn: "I would still feel a little reluctant to leave" },
@@ -216,7 +216,7 @@ const DUAL_EASTER_QUESTIONS = {
     title: "隐藏 4",
     titleEn: "Hidden 4",
     prompt: "当你们马上又要见面的时候，当你认真看向对方的眼睛，你会想什么？",
-    promptEn: "When you are about to meet again and look carefully into TA's eyes, what comes to mind?",
+    promptEn: "When you are about to meet again and look carefully into their eyes, what comes to mind?",
     options: [
       { value: "mom", label: "姐妹你好米呀", labelEn: "Girl, you are so pretty" },
       { value: "judge", label: "这次我要先抱你一下", labelEn: "This time I need to hug you first" },
@@ -270,7 +270,7 @@ const EXTRA_DUAL_QUESTIONS = [
     id: "pairDestination",
     required: true,
     prompt: "如果你和 TA 最后选择去星际旅行，你们会把哪里当成目的地？",
-    promptEn: "If you and TA chose an interstellar trip, where would you go?",
+    promptEn: "If you and the other person chose an interstellar trip, where would you go?",
     options: [
       { value: "wild-planet", label: "一颗有些危险，但充满罕见自然奇观的星球", labelEn: "A slightly dangerous planet full of rare natural wonders", weights: { tacit: 2, chemistry: 5, growth: 4 } },
       { value: "lively-planet", label: "一颗很有烟火气、怎么逛都不会无聊的星球", labelEn: "A lively planet full of ordinary warmth and street-level life", weights: { tacit: 4, chemistry: 4, growth: 3 } },
@@ -282,7 +282,7 @@ const EXTRA_DUAL_QUESTIONS = [
     id: "pairDistance",
     required: true,
     prompt: "如果用宇宙中的距离去描述你和 TA，你们更像——",
-    promptEn: "If cosmic distance described you and TA, you would be closest to...",
+    promptEn: "If cosmic distance described you and the other person, you would be closest to...",
     options: [
       { value: "earth-moon", label: "地球和月亮的距离，始终围绕，也始终看得见", labelEn: "Earth and Moon: always orbiting, always visible", weights: { tacit: 5, chemistry: 3, growth: 4 } },
       { value: "earth-sun", label: "地球和太阳的距离，需要刚好的远近才能长期共存", labelEn: "Earth and Sun: the exact distance needed to coexist", weights: { tacit: 4, chemistry: 2, growth: 5 } },
@@ -1115,10 +1115,10 @@ export function buildDualReading({ relation, answers, leftMatch, rightMatch, lef
 
   const sceneLine = isEnglish()
     ? {
-        aurora: "Seeing cosmic depth in TA's eye means what you feel first is not surface excitement, but a deep, steady gravity that makes you keep looking.",
-        rift: "If TA's eye feels like the danger between a black hole and dark matter, this relationship carries a high-risk pull that is hard to turn away from.",
+        aurora: "Seeing cosmic depth in their eye means what you feel first is not surface excitement, but a deep, steady gravity that makes you keep looking.",
+        rift: "If their eye feels like the danger between a black hole and dark matter, this relationship carries a high-risk pull that is hard to turn away from.",
         harbor: "If you see faraway starlight returning gently, the strongest part is not stimulation, but the feeling of return, harbor, and being held.",
-        meteor: "If TA's eye suggests interstellar adventure, what you feel is not calm, but an invitation pushing you toward the unknown.",
+        meteor: "If their eye suggests interstellar adventure, what you feel is not calm, but an invitation pushing you toward the unknown.",
       }[answers.pairScene] || ""
     : {
         aurora: "你说对方的眼睛更像宇宙的深邃，这说明你感受到的首先不是表面的热闹，而是一种很深、很稳、会让人想继续看下去的引力。",
@@ -1197,7 +1197,7 @@ export function buildDualReading({ relation, answers, leftMatch, rightMatch, lef
   ];
 
   const shareCaption = isEnglish()
-    ? `TA and I got 「${relationshipName}」 in Iris Universe: Tacit ${lineScores.tacit}, Attraction ${lineScores.chemistry}, Growth ${lineScores.growth}.`
+    ? `Someone and I got 「${relationshipName}」 in Iris Universe: Tacit ${lineScores.tacit}, Attraction ${lineScores.chemistry}, Growth ${lineScores.growth}.`
     : `我和TA在虹膜宇宙里测出了「${relationshipName}」：默契线${lineScores.tacit}分、吸引线${lineScores.chemistry}分、成长线${lineScores.growth}分。`;
 
   return {

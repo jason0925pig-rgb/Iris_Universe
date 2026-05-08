@@ -272,7 +272,7 @@ function currentQuestions() {
 }
 
 function defaultCaptureLabel(index) {
-  if (state.mode === "dual") return index === 0 ? text("我", "Me") : "TA";
+  if (state.mode === "dual") return index === 0 ? text("我", "Me") : text("TA", "Other person");
   return text("我", "Me");
 }
 
@@ -1087,7 +1087,7 @@ function renderDualResult() {
           </div>
           <div class="pair-card">
             <div class="nebula-frame"><img src="${rightMatch.nebula.thumb}" alt="${escapeHtml(nebulaAlt(rightMatch.nebula))}" /></div>
-            <h4 style="margin-top: 14px;">TA · ${escapeHtml(nebulaName(rightMatch.nebula))}</h4>
+            <h4 style="margin-top: 14px;">${text("TA", "Other person")} · ${escapeHtml(nebulaName(rightMatch.nebula))}</h4>
             <p>${escapeHtml(nebulaFact(rightMatch.nebula))}</p>
           </div>
         </div>
