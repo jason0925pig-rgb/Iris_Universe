@@ -1,8 +1,8 @@
-﻿import { fileToImage, detectIrisCircle, createCropCanvas, extractIrisFeatures, circleToCropPreview } from "./analysis.js?v=20260422e";
-import { QUESTIONS, buildSingleReading, buildDualReading, getDualEasterQuestion } from "./content.js?v=20260503a";
-import { matchSingle, buildDualRelation } from "./matching.js?v=20260503a";
-import { generateSingleShareCard, generateDualShareCard, triggerDownload } from "./share.js?v=20260503a";
-import { getLanguage, localizeQuestion, nebulaAlt, nebulaFact, nebulaName, setLanguage, text } from "./i18n.js?v=20260503a";
+﻿import { fileToImage, detectIrisCircle, createCropCanvas, extractIrisFeatures, circleToCropPreview } from "./analysis.js?v=20260508a";
+import { QUESTIONS, buildSingleReading, buildDualReading, getDualEasterQuestion } from "./content.js?v=20260508a";
+import { matchSingle, buildDualRelation } from "./matching.js?v=20260508a";
+import { generateSingleShareCard, generateDualShareCard, triggerDownload } from "./share.js?v=20260508a";
+import { getLanguage, localizeQuestion, nebulaAlt, nebulaFact, nebulaName, setLanguage, text } from "./i18n.js?v=20260508a";
 
 const app = document.getElementById("app");
 const FULL_NEBULA_COUNT = 399;
@@ -345,12 +345,18 @@ function createImageFromSrc(src) {
   });
 }
 
+function toRootAssetPath(path) {
+  const value = String(path || "");
+  if (!value || /^(https?:|data:|\/)/i.test(value)) return value;
+  return `/${value.replace(/^\.\//, "")}`;
+}
+
 async function loadNebulae() {
   const params = new URLSearchParams(window.location.search);
   const requestedCatalog = params.get("catalog");
   const datasetPath =
     window.IRIS_UNIVERSE_DATASET ||
-    (requestedCatalog === "v1" ? "./data/nebulae-v1.json" : "./data/nebulae-full.json");
+    (requestedCatalog === "v1" ? "/data/nebulae-v1.json" : "/data/nebulae-full.json");
   const response = await fetch(datasetPath);
   if (!response.ok) {
     throw new Error(text("星云数据库加载失败", "Failed to load the nebula database"));
@@ -842,7 +848,7 @@ function renderCapture() {
           <summary>${text("照片示例", "Photo example")}</summary>
           <div class="expand-card-body">
             <div class="example-shot">
-              <img src="./example.jpg" alt="${text("虹膜拍摄示例", "Iris photo example")}" />
+              <img src="/example.jpg" alt="${text("虹膜拍摄示例", "Iris photo example")}" />
             </div>
             <p class="helper-text">${text("尽量参考这种构图：单只眼睛占据画面主体，睫毛和眼白可以保留一点，但不要太远；光线均匀，少反光，别贴得过近导致失焦。", "Try this kind of framing: one eye fills most of the image, with a little eyelash and sclera allowed. Keep lighting even, reflections low, and avoid getting so close that focus is lost.")}</p>
           </div>
@@ -1626,6 +1632,8 @@ async function init() {
     const nebulae = await loadNebulae();
     state.nebulae = nebulae.map((nebula) => ({
       ...nebula,
+      image: toRootAssetPath(nebula.image),
+      thumb: toRootAssetPath(nebula.thumb),
       titleCn: nebula.titleCn,
     }));
     state.loading = false;

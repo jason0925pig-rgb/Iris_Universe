@@ -1,0 +1,32 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Iris Universe icon">
+  <defs>
+    <radialGradient id="bg" cx="48%" cy="44%" r="58%">
+      <stop offset="0" stop-color="#ffe6a7"/>
+      <stop offset="0.38" stop-color="#ff8a79"/>
+      <stop offset="0.72" stop-color="#5ec8ff"/>
+      <stop offset="1" stop-color="#090816"/>
+    </radialGradient>
+    <radialGradient id="iris" cx="49%" cy="48%" r="50%">
+      <stop offset="0" stop-color="#070813"/>
+      <stop offset="0.22" stop-color="#111831"/>
+      <stop offset="0.46" stop-color="#69d3ff"/>
+      <stop offset="0.72" stop-color="#ffb36b"/>
+      <stop offset="1" stop-color="#fff1bf"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="96" height="96" rx="24" fill="#090816"/>
+  <circle cx="48" cy="48" r="39" fill="url(#bg)" opacity="0.9"/>
+  <ellipse cx="48" cy="48" rx="34" ry="22" fill="none" stroke="#fff8dc" stroke-width="5" opacity="0.9"/>
+  <circle cx="48" cy="48" r="18" fill="url(#iris)" filter="url(#glow)"/>
+  <circle cx="48" cy="48" r="8" fill="#05060f"/>
+  <path d="M18 52c13-8 25-12 60-8M20 44c16 9 35 13 56 8" fill="none" stroke="#9bdcff" stroke-width="2.6" stroke-linecap="round" opacity="0.72"/>
+  <circle cx="68" cy="27" r="3" fill="#fff8dc"/>
+  <circle cx="28" cy="68" r="2.2" fill="#fff8dc" opacity="0.8"/>
+</svg>

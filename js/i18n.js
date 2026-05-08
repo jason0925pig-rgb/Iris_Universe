@@ -17,7 +17,24 @@ function readStoredLanguage() {
   }
 }
 
+function readUrlLanguage() {
+  const params = new URLSearchParams(window.location.search);
+  const rawQueryLanguage = params.get("lang");
+  if (rawQueryLanguage) {
+    const queryLanguage = normalizeLanguage(rawQueryLanguage);
+    if (SUPPORTED_LANGUAGES.has(queryLanguage)) return queryLanguage;
+  }
+
+  const path = window.location.pathname.toLowerCase();
+  if (path === "/zh" || path.startsWith("/zh/")) return "zh";
+  if (path === "/en" || path.startsWith("/en/")) return "en";
+  return "";
+}
+
 function detectInitialLanguage() {
+  const urlLanguage = readUrlLanguage();
+  if (urlLanguage) return urlLanguage;
+
   const stored = readStoredLanguage();
   if (SUPPORTED_LANGUAGES.has(stored)) return stored;
   return normalizeLanguage(navigator.language || navigator.userLanguage || "en");
