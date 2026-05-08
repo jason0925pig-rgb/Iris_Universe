@@ -145,6 +145,7 @@ function cloneQuestion(question) {
   const localized = localizeQuestion(question);
   return {
     ...localized,
+    templatePrompt: question.prompt,
     options: shuffleArray((localized.options || []).map((option) => ({ ...option }))),
   };
 }
@@ -165,7 +166,7 @@ function getPreparedHiddenQuestion() {
     return null;
   }
 
-  if (!state.hiddenQuestion || state.hiddenQuestion.prompt !== hiddenTemplate.prompt) {
+  if (!state.hiddenQuestion || state.hiddenQuestion.templatePrompt !== hiddenTemplate.prompt) {
     state.hiddenQuestion = cloneQuestion(hiddenTemplate);
   }
 
@@ -328,9 +329,11 @@ function allCapturesReady() {
 }
 
 function requiredQuestionsAnswered() {
-  return currentQuestions()
-    .filter((question) => question.required)
-    .every((question) => Boolean(state.answers[question.id]));
+  return missingRequiredQuestions().length === 0;
+}
+
+function missingRequiredQuestions(questions = currentQuestions()) {
+  return questions.filter((question) => question.required && !state.answers[question.id]);
 }
 
 function createImageFromSrc(src) {
@@ -870,6 +873,8 @@ function renderCapture() {
 
 function renderQuestions() {
   const questions = currentQuestions();
+  const missingQuestions = missingRequiredQuestions(questions);
+  const canRunMatching = missingQuestions.length === 0;
   const isSingleMode = state.mode !== "dual";
   const questionIntro = isSingleMode
     ? text(`单人模式现在有 ${QUESTIONS.single.length} 道必答题。`, `Solo Mode has ${QUESTIONS.single.length} required questions.`)
@@ -920,7 +925,11 @@ function renderQuestions() {
         </div>
 
         <div class="inline-actions">
-          <button class="button" data-action="run-matching" ${requiredQuestionsAnswered() ? "" : "disabled"}>${text("开始匹配星云", "Start nebula matching")}</button>
+          <button
+            class="button ${canRunMatching ? "" : "button-disabled"}"
+            data-action="run-matching"
+            aria-disabled="${canRunMatching ? "false" : "true"}"
+          >${text("开始匹配星云", "Start nebula matching")}</button>
           <button class="button-ghost" data-action="back-capture">${text("返回上传页", "Back to upload")}</button>
         </div>
       </article>
@@ -1504,7 +1513,13 @@ async function handleAction(action, element) {
       if (requiredQuestionsAnswered()) {
         await runMatching();
       } else {
-        setToast(state.mode === "dual" ? text("先完成必答题", "Please finish the required questions first.") : text("先完成全部五道题", "Please finish all required questions first."));
+        const missingCount = missingRequiredQuestions().length;
+        setToast(
+          text(
+            `宇宙这样浩瀚，真的不回答完全部问题就走吗？还差 ${missingCount} 题。`,
+            `The universe is this vast, and you're leaving questions unanswered? ${missingCount} question${missingCount > 1 ? "s" : ""} left.`,
+          ),
+        );
       }
       break;
     case "restart":
