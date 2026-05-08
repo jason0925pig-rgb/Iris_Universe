@@ -954,7 +954,7 @@ function renderSingleResult() {
       (variant, index) => `
         <button class="mini-card mini-card-button ${index === activeVariantIndex ? "active" : ""}" data-action="open-single-variant" data-index="${index}">
           <div class="row-between">
-            <h4>${escapeHtml(variant.match.nebula.titleCn || variant.match.nebula.titleShort)}</h4>
+            <h4>${escapeHtml(nebulaName(variant.match.nebula))}</h4>
             <span class="step-counter">${variant.isPrimary ? text("主匹配", "Primary") : text("次级", "Alternate")}</span>
           </div>
           <p>${variant.match.matchRate}% ${text("匹配率", "match")} · ${escapeHtml(nebulaFact(variant.match.nebula))}</p>
