@@ -6,6 +6,8 @@ Thumbs.db
 .cloudflared.out.log
 .http.err.log
 .http.out.log
+.http-v2.log
+.cloudflared-v2.log
 .local-http.err.log
 .local-http.log
 .tscheck.tmp.json
@@ -13,5 +15,6 @@ Thumbs.db
 node_modules/
 __pycache__/
 .font-cache/
+.translation-cache/
 
 image/raw/

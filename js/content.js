@@ -361,10 +361,10 @@ function describeBand(value, lowText, midText, highText) {
   return lowText;
 }
 
-function trimNarrative(seed) {
+function trimNarrative(seed, maxLength = 110) {
   const compact = (seed || "").replace(/\s+/g, " ").trim();
   if (!compact) return "";
-  return compact.length > 110 ? `${compact.slice(0, 108)}…` : compact;
+  return compact.length > maxLength ? `${compact.slice(0, maxLength - 2)}…` : compact;
 }
 
 function questionLookup(questionSet, answers) {
@@ -675,7 +675,12 @@ export function buildSingleReading({ match, userFeatures, answers }) {
   const signalLine = isEnglish() ? pickFrom(answers.signal, SINGLE_SIGNAL_LINES_EN, "") : pickFrom(answers.signal, SINGLE_SIGNAL_LINES, "");
   const roleLine = isEnglish() ? pickFrom(answers.role, SINGLE_ROLE_LINES_EN, "") : pickFrom(answers.role, SINGLE_ROLE_LINES, "");
   const seed = isEnglish()
-    ? `${nebulaName(match.nebula)} does not arrive as decoration. Its colors, textures, and luminous pressure create a visual mirror for the part of you that is hard to summarize.`
+    ? trimNarrative(
+        match.nebula.mainNarrativeSeedEn ||
+          match.nebula.singleNarrativeSeedEn ||
+          `${nebulaName(match.nebula)} does not arrive as decoration. Its colors, textures, and luminous pressure create a visual mirror for the part of you that is hard to summarize.`,
+        260,
+      )
     : trimNarrative(match.nebula.mainNarrativeSeed || match.nebula.singleNarrativeSeed);
   const lineScores = computeSingleLineScores(userFeatures, answers);
   const careerInfluences = strongestInfluences(answers, "career");

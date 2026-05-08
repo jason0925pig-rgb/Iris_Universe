@@ -347,7 +347,7 @@ async function loadNebulae() {
   const requestedCatalog = params.get("catalog");
   const datasetPath =
     window.IRIS_UNIVERSE_DATASET ||
-    (requestedCatalog === "full" ? "./data/nebulae-full.json" : "./data/nebulae-v1.json");
+    (requestedCatalog === "v1" ? "./data/nebulae-v1.json" : "./data/nebulae-full.json");
   const response = await fetch(datasetPath);
   if (!response.ok) {
     throw new Error(text("星云数据库加载失败", "Failed to load the nebula database"));
